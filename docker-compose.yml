@@ -1,0 +1,19 @@
+version: '3'
+services:
+  server:
+    build: ./server
+    command: /server
+    volumes:
+      - ./server:/go/src/github.com/y-yagi/artworks
+      - /go/src/github.com/y-yagi/artworks/vendor
+    ports:
+      - "3001:3001"
+  client:
+    build: ./client
+    command: npm start
+    image: artworks/client
+    volumes:
+      - ./client:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "3000:3000"

@@ -24,6 +24,9 @@
 #   go-tests = true
 #   unused-packages = true
 
+[metadata.heroku]
+  root-package = "github.com/y-yagi/artworks/"
+  go-version = "go1.10.3"
 
 [[constraint]]
   name = "github.com/labstack/echo"

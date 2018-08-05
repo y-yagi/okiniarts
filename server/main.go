@@ -5,6 +5,7 @@ import (
 	"os"
 	"strconv"
 
+	"github.com/go-pg/pg"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 )
@@ -14,7 +15,10 @@ type ArtWork struct {
 	Title string `json:"title"`
 }
 
+var db *pg.DB
+
 func main() {
+	initDB()
 	e := echo.New()
 
 	e.Use(middleware.Logger())
@@ -43,4 +47,11 @@ func artwork(c echo.Context) error {
 	id, _ := strconv.Atoi(c.Param("id"))
 	artwork := &ArtWork{Id: id, Title: "海辺の船"}
 	return c.JSON(http.StatusOK, artwork)
+}
+func initDB() {
+	options, err := pg.ParseURL(os.Getenv("DATABASE_URL"))
+	if err != nil {
+		panic(err)
+	}
+	db = pg.Connect(options)
 }

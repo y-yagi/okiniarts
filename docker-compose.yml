@@ -11,9 +11,18 @@ services:
   client:
     build: ./client
     command: npm start
-    image: artworks/client
     volumes:
       - ./client:/usr/src/app
       - /usr/src/app/node_modules
     ports:
       - "3000:3000"
+  db:
+    build: ./db
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgresql:/var/lib/postgresql/data
+
+volumes:
+  postgresql:
+    driver: local

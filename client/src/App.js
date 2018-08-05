@@ -5,12 +5,12 @@ class App extends Component {
   constructor () {
     super()
     this.state = {}
-    this.getArtWorks = this.getArtWorks.bind(this)
-    this.getArtWork = this.getArtWork.bind(this)
+    this.getArts = this.getArts.bind(this)
+    this.getArt = this.getArt.bind(this)
   }
 
   componentDidMount () {
-    this.getArtWorks()
+    this.getArts()
   }
 
   fetch (endpoint) {
@@ -19,26 +19,26 @@ class App extends Component {
       .catch(error => console.log(error))
   }
 
-  getArtWorks () {
-    this.fetch('/api/artworks')
-      .then(artworks => {
-        if (artworks.length) {
-          this.setState({artworks: artworks})
-          this.getArtWork(artworks[0].id)
+  getArts () {
+    this.fetch('/api/arts')
+      .then(arts => {
+        if (arts.length) {
+          this.setState({arts: arts})
+          this.getArt(arts[0].id)
         } else {
-          this.setState({artworks: []})
+          this.setState({arts: []})
         }
       })
   }
 
-  getArtWork(id) {
-    this.fetch(`/api/artworks/${id}`)
-      .then(artwork => this.setState({artwork: artwork}))
+  getArt(id) {
+    this.fetch(`/api/arts/${id}`)
+      .then(art => this.setState({art: art}))
   }
 
   render () {
-    let {artworks, artwork} = this.state
-    return artworks
+    let {arts, art} = this.state
+    return arts
       ? <Container text>
         <Header as='h2' icon textAlign='center' color='teal'>
           <Icon name='unordered list' circular />
@@ -47,28 +47,28 @@ class App extends Component {
           </Header.Content>
         </Header>
         <Divider hidden section />
-        {artworks && artworks.length
-          ? <Button.Group color='teal' fluid widths={artworks.length}>
-            {Object.keys(artworks).map((key) => {
-              return <Button active={artwork && artwork.id === artworks[key].id} fluid key={key} onClick={() => this.getArtWork(artworks[key].id)}>
-                {artworks[key].title}
+        {arts && arts.length
+          ? <Button.Group color='teal' fluid widths={arts.length}>
+            {Object.keys(arts).map((key) => {
+              return <Button active={art && art.id === arts[key].id} fluid key={key} onClick={() => this.getArt(arts[key].id)}>
+                {arts[key].name}
               </Button>
             })}
           </Button.Group>
-          : <Container textAlign='center'>No artworks found.</Container>
+          : <Container textAlign='center'>No arts found.</Container>
         }
         <Divider section />
-        {artwork &&
+        {art &&
           <Container>
-            <Header as='h2'>{artwork.title}</Header>
-            {artwork.description && <p>{artwork.description}</p>}
-            {artwork.ingredients &&
+            <Header as='h2'>{art.name}</Header>
+            {art.description && <p>{art.description}</p>}
+            {art.ingredients &&
               <Segment.Group>
-                {artwork.ingredients.map((ingredient, i) => <Segment key={i}>{ingredient.description}</Segment>)}
+                {art.ingredients.map((ingredient, i) => <Segment key={i}>{ingredient.description}</Segment>)}
               </Segment.Group>
             }
-            {artwork.steps && <p>{artwork.steps}</p>}
-            {artwork.source && <Button basic size='tiny' color='teal' href={artwork.source}>Source</Button>}
+            {art.steps && <p>{art.steps}</p>}
+            {art.source && <Button basic size='tiny' color='teal' href={art.source}>Source</Button>}
           </Container>
         }
       </Container>

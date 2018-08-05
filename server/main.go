@@ -10,9 +10,9 @@ import (
 	"github.com/labstack/echo/middleware"
 )
 
-type ArtWork struct {
-	Id    int    `json:"id"`
-	Title string `json:"title"`
+type Art struct {
+	Id   int    `json:"id"`
+	Name string `json:"name"`
 }
 
 var db *pg.DB
@@ -26,8 +26,8 @@ func main() {
 
 	e.Static("/static", "public/static")
 	e.File("/", "public/index.html")
-	e.GET("/api/artworks", artworks)
-	e.GET("/api/artworks/:id", artwork)
+	e.GET("/api/arts", arts)
+	e.GET("/api/arts/:id", art)
 
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -36,17 +36,17 @@ func main() {
 	e.Logger.Fatal(e.Start(":" + port))
 }
 
-func artworks(c echo.Context) error {
-	var artworks []*ArtWork
-	artworks = append(artworks, &ArtWork{Id: 1, Title: "海辺の船"})
-	artworks = append(artworks, &ArtWork{Id: 2, Title: "ルーアン大聖堂"})
-	return c.JSON(http.StatusOK, artworks)
+func arts(c echo.Context) error {
+	var arts []*Art
+	arts = append(arts, &Art{Id: 1, Name: "海辺の船"})
+	arts = append(arts, &Art{Id: 2, Name: "ルーアン大聖堂"})
+	return c.JSON(http.StatusOK, arts)
 }
 
-func artwork(c echo.Context) error {
+func art(c echo.Context) error {
 	id, _ := strconv.Atoi(c.Param("id"))
-	artwork := &ArtWork{Id: id, Title: "海辺の船"}
-	return c.JSON(http.StatusOK, artwork)
+	art := &Art{Id: id, Name: "海辺の船"}
+	return c.JSON(http.StatusOK, art)
 }
 func initDB() {
 	options, err := pg.ParseURL(os.Getenv("DATABASE_URL"))

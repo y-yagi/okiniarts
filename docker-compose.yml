@@ -1,6 +1,7 @@
 version: '3'
 services:
   server:
+    container_name: artworks_server
     build: ./server
     command: /server
     volumes:
@@ -8,7 +9,12 @@ services:
       - /go/src/github.com/y-yagi/artworks/vendor
     ports:
       - "3001:3001"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgres://artworks:artworks@db/artworks?sslmode=disable
   client:
+    container_name: artworks_client
     build: ./client
     command: npm start
     volumes:
@@ -17,6 +23,7 @@ services:
     ports:
       - "3000:3000"
   db:
+    container_name: artworks_db
     build: ./db
     ports:
       - "5434:5432"

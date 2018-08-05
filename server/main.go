@@ -2,6 +2,7 @@ package main
 
 import (
 	"net/http"
+	"os"
 	"strconv"
 
 	"github.com/labstack/echo"
@@ -23,7 +24,11 @@ func main() {
 	e.GET("/api/artworks", artworks)
 	e.GET("/api/artworks/:id", artwork)
 
-	e.Logger.Fatal(e.Start(":3001"))
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "3001"
+	}
+	e.Logger.Fatal(e.Start(":" + port))
 }
 
 func hello(c echo.Context) error {

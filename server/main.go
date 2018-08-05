@@ -20,7 +20,8 @@ func main() {
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
-	e.GET("/", hello)
+	e.Static("/static", "public/static")
+	e.File("/", "public/index.html")
 	e.GET("/api/artworks", artworks)
 	e.GET("/api/artworks/:id", artwork)
 
@@ -29,10 +30,6 @@ func main() {
 		port = "3001"
 	}
 	e.Logger.Fatal(e.Start(":" + port))
-}
-
-func hello(c echo.Context) error {
-	return c.String(http.StatusOK, "Hello, World!")
 }
 
 func artworks(c echo.Context) error {

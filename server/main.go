@@ -11,8 +11,9 @@ import (
 )
 
 type Art struct {
-	Id   int    `json:"id"`
-	Name string `json:"name"`
+	Id     int    `json:"id"`
+	Name   string `json:"name"`
+	Detail string `json:"detail"`
 }
 
 var db *pg.DB
@@ -37,17 +38,24 @@ func main() {
 }
 
 func arts(c echo.Context) error {
-	var arts []*Art
-	arts = append(arts, &Art{Id: 1, Name: "海辺の船"})
-	arts = append(arts, &Art{Id: 2, Name: "ルーアン大聖堂"})
+	var arts []Art
+	if err := db.Model(&arts).Select(); err != nil {
+		return err
+	}
+
 	return c.JSON(http.StatusOK, arts)
 }
 
 func art(c echo.Context) error {
 	id, _ := strconv.Atoi(c.Param("id"))
-	art := &Art{Id: id, Name: "海辺の船"}
+	art := &Art{Id: id}
+	if err := db.Select(art); err != nil {
+		return err
+	}
+
 	return c.JSON(http.StatusOK, art)
 }
+
 func initDB() {
 	options, err := pg.ParseURL(os.Getenv("DATABASE_URL"))
 	if err != nil {

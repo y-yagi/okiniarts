@@ -33,3 +33,7 @@ services:
 volumes:
   postgresql:
     driver: local
+  client:
+    driver: local
+  server:
+    driver: local

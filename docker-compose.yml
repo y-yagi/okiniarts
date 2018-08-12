@@ -1,20 +1,20 @@
 version: '3'
 services:
   server:
-    container_name: artworks_server
+    container_name: okiniarts_server
     build: ./server
     command: /server
     volumes:
-      - ./server:/go/src/github.com/y-yagi/artworks
-      - /go/src/github.com/y-yagi/artworks/vendor
+      - ./server:/go/src/github.com/y-yagi/okiniarts
+      - /go/src/github.com/y-yagi/okiniarts/vendor
     ports:
       - "3001:3001"
     depends_on:
       - db
     environment:
-      DATABASE_URL: postgres://artworks:artworks@db/artworks?sslmode=disable
+      DATABASE_URL: postgres://okiniarts:okiniarts@db/okiniarts?sslmode=disable
   client:
-    container_name: artworks_client
+    container_name: okiniarts_client
     build: ./client
     command: npm start
     volumes:
@@ -23,7 +23,7 @@ services:
     ports:
       - "3000:3000"
   db:
-    container_name: artworks_db
+    container_name: okiniarts_db
     build: ./db
     ports:
       - "5434:5432"

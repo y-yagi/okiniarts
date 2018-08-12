@@ -1,3 +1,3 @@
-create role artworks login password 'artworks';
-create database artworks;
-grant all privileges on database artworks to artworks;
+create role okiniarts login password 'okiniarts';
+create database okiniarts;
+grant all privileges on database okiniarts to okiniarts;

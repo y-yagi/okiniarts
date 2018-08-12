@@ -1,1 +1,1 @@
-web: server/bin/artworks
+web: server/bin/okiniarts

@@ -25,7 +25,7 @@
 #   unused-packages = true
 
 [metadata.heroku]
-  root-package = "github.com/y-yagi/artworks/"
+  root-package = "github.com/y-yagi/okiniarts/"
   go-version = "go1.10.3"
 
 [[constraint]]

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Container, Header, Segment, Button, Icon, Dimmer, Loader, Divider } from 'semantic-ui-react'
+import Auth from '../auth/Auth.js'
+import { Container, Header, Segment, Button, Icon, Dimmer, Loader, Divider, Form } from 'semantic-ui-react'
 
 class App extends Component {
   constructor () {
@@ -11,6 +12,18 @@ class App extends Component {
 
   componentDidMount () {
     this.getArts()
+  }
+
+  goTo(route) {
+    this.props.history.replace(`/${route}`)
+  }
+
+  login() {
+    this.props.auth.login();
+  }
+
+  logout() {
+    this.props.auth.logout();
   }
 
   fetch (endpoint) {
@@ -38,6 +51,23 @@ class App extends Component {
 
   render () {
     let {arts, art} = this.state
+    const { isAuthenticated } = this.props.auth;
+
+    if (!isAuthenticated()) {
+      return (
+        <Container text>
+          <Header as='h2' icon textAlign='center' color='teal'>
+            <Header.Content>Please login</Header.Content>
+            <Form>
+              <Button id="qsLoginBtn" bsStyle="primary" className="btn-margin" onClick={this.login.bind(this)}>
+                Log In
+              </Button>
+            </Form>
+          </Header>
+        </Container>
+      )
+    }
+
     return arts
       ? <Container text>
         <Header as='h2' icon textAlign='center' color='teal'>

@@ -1,7 +1,11 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
 import 'semantic-ui-css/semantic.css'
 import './index.css';
-import App from './components/App';
+import { makeMainRoutes } from './routes';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const routes = makeMainRoutes();
+
+ReactDOM.render(
+  routes,
+  document.getElementById('root')
+);

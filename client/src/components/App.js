@@ -17,10 +17,6 @@ class App extends Component {
     this.props.history.replace(`/${route}`)
   }
 
-  login() {
-    this.props.auth.login();
-  }
-
   logout() {
     this.props.auth.logout();
   }
@@ -52,22 +48,6 @@ class App extends Component {
 
   render () {
     let {arts, art} = this.state
-    const { isAuthenticated } = this.props.auth;
-
-    if (!isAuthenticated()) {
-      return (
-        <Container text>
-          <Header as='h2' icon textAlign='center' color='teal'>
-            <Header.Content>Please login</Header.Content>
-            <Form>
-              <Button id="qsLoginBtn" className="btn-margin" onClick={this.login.bind(this)}>
-                Log In
-              </Button>
-            </Form>
-          </Header>
-        </Container>
-      )
-    }
 
     return arts
       ? <Container text>

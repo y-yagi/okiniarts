@@ -1,7 +1,8 @@
 import React from "react";
-import { Route, Router } from "react-router-dom";
+import { Redirect, Route, Router } from "react-router-dom";
 import App from "./components/App";
-import Callback from "./components//Callback";
+import Login from "./components/Login";
+import Callback from "./components/Callback";
 import Auth from "./auth/Auth";
 import history from "./history";
 
@@ -17,7 +18,7 @@ export const makeMainRoutes = () => {
   return (
     <Router history={history}>
       <div>
-        <Route path="/" render={props => <App auth={auth} {...props} />} />
+        <Route path="/login" render={props => <Login auth={auth} {...props} />} />
         <Route
           path="/callback"
           render={props => {
@@ -25,6 +26,13 @@ export const makeMainRoutes = () => {
             return <Callback {...props} />;
           }}
         />
+        <Route path="/" render={(props) => (
+          !auth.isAuthenticated() ? (
+            <Redirect to="/login"/>
+          ) : (
+            <App auth={auth} {...props} />
+          )
+        )} />
       </div>
     </Router>
   );

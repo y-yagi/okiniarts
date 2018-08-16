@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Auth from '../auth/Auth.js'
 import { Container, Header, Segment, Button, Icon, Dimmer, Loader, Divider, Form } from 'semantic-ui-react'
 
 class App extends Component {
@@ -59,7 +58,7 @@ class App extends Component {
           <Header as='h2' icon textAlign='center' color='teal'>
             <Header.Content>Please login</Header.Content>
             <Form>
-              <Button id="qsLoginBtn" bsStyle="primary" className="btn-margin" onClick={this.login.bind(this)}>
+              <Button id="qsLoginBtn" className="btn-margin" onClick={this.login.bind(this)}>
                 Log In
               </Button>
             </Form>

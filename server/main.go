@@ -1,10 +1,12 @@
 package main
 
 import (
+	"io/ioutil"
 	"net/http"
 	"os"
 	"strconv"
 
+	jwt "github.com/dgrijalva/jwt-go"
 	"github.com/go-pg/pg"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
@@ -27,8 +29,15 @@ func main() {
 
 	e.Static("/static", "public/static")
 	e.File("/", "public/index.html")
-	e.GET("/api/arts", arts)
-	e.GET("/api/arts/:id", art)
+
+	r := e.Group("/api")
+	config := middleware.JWTConfig{
+		SigningMethod: "RS256",
+		SigningKey:    auth0Key(),
+	}
+	r.Use(middleware.JWTWithConfig(config))
+	r.GET("/arts", arts)
+	r.GET("/arts/:id", art)
 
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -62,4 +71,10 @@ func initDB() {
 		panic(err)
 	}
 	db = pg.Connect(options)
+}
+
+func auth0Key() interface{} {
+	pem, _ := ioutil.ReadFile("auth0_pubkey")
+	key, _ := jwt.ParseRSAPublicKeyFromPEM(pem)
+	return key
 }

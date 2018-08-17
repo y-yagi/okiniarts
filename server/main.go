@@ -48,7 +48,7 @@ func main() {
 
 func arts(c echo.Context) error {
 	var arts []Art
-	if err := db.Model(&arts).Select(); err != nil {
+	if err := db.Model(&arts).Where("user_identifier = ?", extractUserID(c)).Select(); err != nil {
 		return err
 	}
 
@@ -58,7 +58,7 @@ func arts(c echo.Context) error {
 func art(c echo.Context) error {
 	id, _ := strconv.Atoi(c.Param("id"))
 	art := &Art{Id: id}
-	if err := db.Select(art); err != nil {
+	if err := db.Model(art).Where("user_identifier = ? AND id = ?", extractUserID(c), id).Select(); err != nil {
 		return err
 	}
 
@@ -77,4 +77,10 @@ func auth0Key() interface{} {
 	pem, _ := ioutil.ReadFile("auth0_pubkey")
 	key, _ := jwt.ParseRSAPublicKeyFromPEM(pem)
 	return key
+}
+
+func extractUserID(c echo.Context) string {
+	token := c.Get("user").(*jwt.Token)
+	claims, _ := token.Claims.(jwt.MapClaims)
+	return claims["sub"].(string)
 }

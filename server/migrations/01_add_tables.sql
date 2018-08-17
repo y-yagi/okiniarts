@@ -16,6 +16,7 @@ SET default_with_oids = false;
 CREATE TABLE artists (
     id bigint NOT NULL,
     name character varying NOT NULL,
+    user_identifier character varying NOT NULL,
     detail text,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
@@ -47,6 +48,7 @@ ALTER SEQUENCE artists_id_seq OWNED BY artists.id;
 CREATE TABLE arts (
     id bigint NOT NULL,
     name character varying NOT NULL,
+    user_identifier character varying NOT NULL,
     detail text,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL

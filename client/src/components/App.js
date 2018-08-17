@@ -32,7 +32,7 @@ class App extends Component {
   getArts () {
     this.fetch('/api/arts')
       .then(arts => {
-        if (arts.length) {
+        if (arts && arts.length) {
           this.setState({arts: arts})
           this.getArt(arts[0].id)
         } else {

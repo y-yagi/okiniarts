@@ -22,6 +22,16 @@ var db *pg.DB
 
 func main() {
 	initDB()
+	e := createServer()
+
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "3001"
+	}
+	e.Logger.Fatal(e.Start(":" + port))
+}
+
+func createServer() *echo.Echo {
 	e := echo.New()
 
 	e.Use(middleware.Logger())
@@ -39,11 +49,7 @@ func main() {
 	r.GET("/arts", arts)
 	r.GET("/arts/:id", art)
 
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "3001"
-	}
-	e.Logger.Fatal(e.Start(":" + port))
+	return e
 }
 
 func arts(c echo.Context) error {

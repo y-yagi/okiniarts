@@ -50,7 +50,7 @@ class App extends Component {
     let {arts, art} = this.state
 
     return arts
-      ? <Container text>
+      ? <Container style={{ marginTop: '7em' }}>
         <Header as='h2' icon textAlign='center' color='teal'>
           <Icon name='unordered list' circular />
           <Header.Content>
@@ -83,7 +83,7 @@ class App extends Component {
           </Container>
         }
       </Container>
-      : <Container text>
+      : <Container style={{ marginTop: '7em' }}>
         <Dimmer active inverted>
           <Loader content='Loading' />
         </Dimmer>

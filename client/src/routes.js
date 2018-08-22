@@ -1,5 +1,6 @@
 import React from "react";
 import { Redirect, Route, Router } from "react-router-dom";
+import HeaderMenu from "./components/HeaderMenu";
 import App from "./components/App";
 import Login from "./components/Login";
 import Callback from "./components/Callback";
@@ -18,7 +19,10 @@ export const makeMainRoutes = () => {
   return (
     <Router history={history}>
       <div>
-        <Route path="/login" render={props => <Login auth={auth} {...props} />} />
+        <Route
+          path="/login"
+          render={props => <Login auth={auth} {...props} />}
+        />
         <Route
           path="/callback"
           render={props => {
@@ -26,13 +30,19 @@ export const makeMainRoutes = () => {
             return <Callback {...props} />;
           }}
         />
-        <Route path="/" render={(props) => (
-          !auth.isAuthenticated() ? (
-            <Redirect to="/login"/>
-          ) : (
-            <App auth={auth} {...props} />
-          )
-        )} />
+        <Route
+          path="/"
+          render={props =>
+            !auth.isAuthenticated() ? (
+              <Redirect to="/login" />
+            ) : (
+              <div>
+                <HeaderMenu />
+                <App auth={auth} {...props} />
+              </div>
+            )
+          }
+        />
       </div>
     </Router>
   );

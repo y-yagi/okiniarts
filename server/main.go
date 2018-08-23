@@ -16,15 +16,15 @@ type Art struct {
 	Id       int    `json:"id"`
 	Name     string `json:"name"`
 	Detail   string `json:"detail"`
-	ArtistID int
-	Artist   Artist
+	ArtistID int    `json:"artist_id"`
+	Artist   Artist `json:"artist"`
 }
 
 type Artist struct {
 	Id     int    `json:"id"`
 	Name   string `json:"name"`
 	Detail string `json:"detail"`
-	Arts   []*Art
+	Arts   []*Art `json:"arts"`
 }
 
 var db *pg.DB

@@ -18,6 +18,12 @@ type Art struct {
 	Detail string `json:"detail"`
 }
 
+type Artist struct {
+	Id     int    `json:"id"`
+	Name   string `json:"name"`
+	Detail string `json:"detail"`
+}
+
 var db *pg.DB
 
 func main() {
@@ -48,6 +54,8 @@ func createServer() *echo.Echo {
 	r.Use(middleware.JWTWithConfig(config))
 	r.GET("/arts", arts)
 	r.GET("/arts/:id", art)
+	r.GET("/artists", artists)
+	r.GET("/artists/:id", artist)
 
 	return e
 }
@@ -65,6 +73,25 @@ func art(c echo.Context) error {
 	id, _ := strconv.Atoi(c.Param("id"))
 	art := &Art{Id: id}
 	if err := db.Model(art).Where("user_identifier = ? AND id = ?", extractUserID(c), id).Select(); err != nil {
+		return err
+	}
+
+	return c.JSON(http.StatusOK, art)
+}
+
+func artists(c echo.Context) error {
+	var artists []Artist
+	if err := db.Model(&artists).Where("user_identifier = ?", extractUserID(c)).Select(); err != nil {
+		return err
+	}
+
+	return c.JSON(http.StatusOK, artists)
+}
+
+func artist(c echo.Context) error {
+	id, _ := strconv.Atoi(c.Param("id"))
+	artist := &Artist{Id: id}
+	if err := db.Model(artist).Where("user_identifier = ? AND id = ?", extractUserID(c), id).Select(); err != nil {
 		return err
 	}
 

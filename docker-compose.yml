@@ -28,10 +28,10 @@ services:
     ports:
       - "5434:5432"
     volumes:
-      - postgresql:/var/lib/postgresql/data
+      - db:/var/lib/postgresql/data
 
 volumes:
-  postgresql:
+  db:
     driver: local
   client:
     driver: local

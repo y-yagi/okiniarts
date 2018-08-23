@@ -11,9 +11,7 @@ class HeaderMenu extends Component {
           <Menu.Item as='a' header>
             Okini Arts
           </Menu.Item>
-          <Menu.Item as='a'>
-            <Link to='/' />Home
-          </Menu.Item>
+          <Menu.Item as={Link} to='/'>Home</Menu.Item>
         </Container>
       </Menu>
     )

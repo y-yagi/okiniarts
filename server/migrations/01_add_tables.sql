@@ -50,6 +50,7 @@ CREATE TABLE arts (
     name character varying NOT NULL,
     user_identifier character varying NOT NULL,
     detail text,
+    artist_id bigint NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL
 );

@@ -13,15 +13,18 @@ import (
 )
 
 type Art struct {
-	Id     int    `json:"id"`
-	Name   string `json:"name"`
-	Detail string `json:"detail"`
+	Id       int    `json:"id"`
+	Name     string `json:"name"`
+	Detail   string `json:"detail"`
+	ArtistID int
+	Artist   Artist
 }
 
 type Artist struct {
 	Id     int    `json:"id"`
 	Name   string `json:"name"`
 	Detail string `json:"detail"`
+	Arts   []*Art
 }
 
 var db *pg.DB
@@ -62,7 +65,7 @@ func createServer() *echo.Echo {
 
 func arts(c echo.Context) error {
 	var arts []Art
-	if err := db.Model(&arts).Where("user_identifier = ?", extractUserID(c)).Select(); err != nil {
+	if err := db.Model(&arts).Relation("Artist").Where("art.user_identifier = ?", extractUserID(c)).Select(); err != nil {
 		return err
 	}
 
@@ -72,7 +75,7 @@ func arts(c echo.Context) error {
 func art(c echo.Context) error {
 	id, _ := strconv.Atoi(c.Param("id"))
 	art := &Art{Id: id}
-	if err := db.Model(art).Where("user_identifier = ? AND id = ?", extractUserID(c), id).Select(); err != nil {
+	if err := db.Model(art).Relation("Artist").Where("art.user_identifier = ? AND art.id = ?", extractUserID(c), id).Select(); err != nil {
 		return err
 	}
 

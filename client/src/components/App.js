@@ -58,6 +58,11 @@ class App extends Component {
           </Header.Content>
         </Header>
         <Divider hidden section />
+        <div>
+          <Button primary floated='right'>Add artist</Button>
+          <Button primary floated='right'>Add art</Button>
+        </div>
+        <Divider hidden section />
         <Grid>
           <Grid.Column width={4}>
           {arts && arts.length

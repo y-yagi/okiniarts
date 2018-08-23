@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Header, Segment, Button, Icon, Dimmer, Loader, Divider, Form } from 'semantic-ui-react'
+import { Container, Header, Segment, Button, Icon, Dimmer, Loader, Divider, Form, Grid, Label } from 'semantic-ui-react'
 
 class App extends Component {
   constructor () {
@@ -58,30 +58,28 @@ class App extends Component {
           </Header.Content>
         </Header>
         <Divider hidden section />
-        {arts && arts.length
-          ? <Button.Group color='teal' fluid widths={arts.length}>
-            {Object.keys(arts).map((key) => {
-              return <Button active={art && art.id === arts[key].id} fluid key={key} onClick={() => this.getArt(arts[key].id)}>
-                {arts[key].name}
-              </Button>
-            })}
-          </Button.Group>
-          : <Container textAlign='center'>No arts found.</Container>
-        }
-        <Divider section />
-        {art &&
-          <Container>
-            <Header as='h2'>{art.name}</Header>
-            {art.description && <p>{art.description}</p>}
-            {art.ingredients &&
-              <Segment.Group>
-                {art.ingredients.map((ingredient, i) => <Segment key={i}>{ingredient.description}</Segment>)}
-              </Segment.Group>
+        <Grid>
+          <Grid.Column width={4}>
+          {arts && arts.length
+            ? <Button.Group color='teal' vertical widths={arts.length}>
+              {Object.keys(arts).map((key) => {
+                return <Button active={art && art.id === arts[key].id} fluid key={key} onClick={() => this.getArt(arts[key].id)}>
+                  {arts[key].name}
+                </Button>
+              })}
+            </Button.Group>
+            : <Container textAlign='center'>No arts found.</Container>
+          }
+          </Grid.Column>
+          <Grid.Column width={8}>
+            {art &&
+              <Container text>
+                <Header as='h3' color='teal'>{art.name}<Label>{art.artist.name}</Label> </Header>
+                {art.detail && <p>{art.detail}</p>}
+              </Container>
             }
-            {art.steps && <p>{art.steps}</p>}
-            {art.source && <Button basic size='tiny' color='teal' href={art.source}>Source</Button>}
-          </Container>
-        }
+          </Grid.Column>
+        </Grid>
       </Container>
       : <Container style={{ marginTop: '7em' }}>
         <Dimmer active inverted>

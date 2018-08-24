@@ -13,18 +13,20 @@ import (
 )
 
 type Art struct {
-	Id       int    `json:"id"`
-	Name     string `json:"name"`
-	Detail   string `json:"detail"`
-	ArtistID int    `json:"artist_id"`
-	Artist   Artist `json:"artist"`
+	Id             int    `json:"id"`
+	Name           string `json:"name"`
+	Detail         string `json:"detail"`
+	ArtistID       int    `json:"artist_id"`
+	UserIdentifier string `json:"-"`
+	Artist         Artist `json:"artist"`
 }
 
 type Artist struct {
-	Id     int    `json:"id"`
-	Name   string `json:"name"`
-	Detail string `json:"detail"`
-	Arts   []*Art `json:"arts"`
+	Id             int    `json:"id"`
+	Name           string `json:"name"`
+	Detail         string `json:"detail"`
+	UserIdentifier string `json:"-"`
+	Arts           []*Art `json:"arts"`
 }
 
 var db *pg.DB
@@ -57,8 +59,11 @@ func createServer() *echo.Echo {
 	r.Use(middleware.JWTWithConfig(config))
 	r.GET("/arts", arts)
 	r.GET("/arts/:id", art)
-	r.GET("/artists", artists)
-	r.GET("/artists/:id", artist)
+	r.GET("/artists", getArtists)
+	r.POST("/artists", createArtist)
+	r.GET("/artists/:id", getArtist)
+	r.PUT("/artists/:id", updateArtist)
+	r.DELETE("/artists/:id", deleteArtist)
 
 	return e
 }
@@ -82,7 +87,7 @@ func art(c echo.Context) error {
 	return c.JSON(http.StatusOK, art)
 }
 
-func artists(c echo.Context) error {
+func getArtists(c echo.Context) error {
 	var artists []Artist
 	if err := db.Model(&artists).Where("user_identifier = ?", extractUserID(c)).Select(); err != nil {
 		return err
@@ -91,14 +96,60 @@ func artists(c echo.Context) error {
 	return c.JSON(http.StatusOK, artists)
 }
 
-func artist(c echo.Context) error {
-	id, _ := strconv.Atoi(c.Param("id"))
-	artist := &Artist{Id: id}
-	if err := db.Model(artist).Where("user_identifier = ? AND id = ?", extractUserID(c), id).Select(); err != nil {
+func createArtist(c echo.Context) error {
+	a := &Artist{
+		UserIdentifier: extractUserID(c),
+	}
+	if err := c.Bind(a); err != nil {
 		return err
 	}
 
-	return c.JSON(http.StatusOK, art)
+	err := db.Insert(&a)
+	if err != nil {
+		return err
+	}
+
+	return c.JSON(http.StatusCreated, a)
+}
+
+func getArtist(c echo.Context) error {
+	id, _ := strconv.Atoi(c.Param("id"))
+	a := &Artist{Id: id}
+	if err := db.Model(a).Where("user_identifier = ? AND id = ?", extractUserID(c), id).Select(); err != nil {
+		return err
+	}
+
+	return c.JSON(http.StatusOK, a)
+}
+
+func updateArtist(c echo.Context) error {
+	id, _ := strconv.Atoi(c.Param("id"))
+	a := &Artist{Id: id}
+	if err := db.Model(a).Where("user_identifier = ? AND id = ?", extractUserID(c), id).Select(); err != nil {
+		return err
+	}
+
+	if err := c.Bind(a); err != nil {
+		return err
+	}
+
+	err := db.Update(a)
+	if err != nil {
+		return err
+	}
+
+	return c.JSON(http.StatusCreated, a)
+}
+
+func deleteArtist(c echo.Context) error {
+	id, _ := strconv.Atoi(c.Param("id"))
+	a := &Artist{Id: id}
+	if err := db.Model(a).Where("user_identifier = ? AND id = ?", extractUserID(c), id).Select(); err != nil {
+		return err
+	}
+
+	db.Delete(a)
+	return c.NoContent(http.StatusNoContent)
 }
 
 func initDB() {

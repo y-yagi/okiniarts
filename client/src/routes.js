@@ -4,6 +4,7 @@ import HeaderMenu from "./components/HeaderMenu";
 import App from "./components/App";
 import Login from "./components/Login";
 import Callback from "./components/Callback";
+import ArtistForm from "./components/ArtistForm";
 import Auth from "./auth/Auth";
 import history from "./history";
 
@@ -45,7 +46,8 @@ export const makeMainRoutes = () => {
               return <Callback {...props} />;
             }}
           />
-          <PrivateRoute path="/" component={App} auth={auth} />
+          <PrivateRoute extract path="/artists/new" component={ArtistForm} auth={auth} />
+          <PrivateRoute extract path="/" component={App} auth={auth} />
         </Switch>
       </div>
     </Router>

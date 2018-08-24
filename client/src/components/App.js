@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import { Container, Header, Segment, Button, Icon, Dimmer, Loader, Divider, Form, Grid, Label } from 'semantic-ui-react'
 
 class App extends Component {
@@ -59,7 +60,7 @@ class App extends Component {
         </Header>
         <Divider hidden section />
         <div>
-          <Button primary floated='right'>Add artist</Button>
+          <Button primary floated='right' as={Link} to='/artists/new'>Add artist</Button>
           <Button primary floated='right'>Add art</Button>
         </div>
         <Divider hidden section />

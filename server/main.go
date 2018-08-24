@@ -104,7 +104,7 @@ func createArtist(c echo.Context) error {
 		return err
 	}
 
-	err := db.Insert(&a)
+	err := db.Insert(a)
 	if err != nil {
 		return err
 	}

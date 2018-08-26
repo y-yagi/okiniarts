@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import { Container, Header, Segment, Button, Icon, Dimmer, Loader, Divider, Form, Grid, Label } from 'semantic-ui-react'
+import { Container, Header, Segment, Button, Icon, Dimmer, Loader, Divider, Form, Grid, Label, Message } from 'semantic-ui-react'
 
 class App extends Component {
   constructor () {
@@ -8,9 +8,14 @@ class App extends Component {
     this.state = {}
     this.getArts = this.getArts.bind(this)
     this.getArt = this.getArt.bind(this)
+    this.message = '';
   }
 
   componentDidMount () {
+    if (this.props.location.state && this.props.location.state.message) {
+      this.message = this.props.location.state.message
+      this.props.history.replace('/')
+    }
     this.getArts()
   }
 
@@ -47,11 +52,24 @@ class App extends Component {
       .then(art => this.setState({art: art}))
   }
 
+  renderMessage() {
+    if (this.message) {
+      return (
+        <Message positive>
+          <Message.Header>{this.message}</Message.Header>
+        </Message>
+      )
+    } else {
+      return ""
+    }
+  }
+
   render () {
     let {arts, art} = this.state
 
     return arts
       ? <Container style={{ marginTop: '7em' }}>
+        { this.renderMessage() }
         <Header as='h2' icon textAlign='center' color='teal'>
           <Icon name='unordered list' circular />
           <Header.Content>

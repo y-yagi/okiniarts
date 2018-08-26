@@ -27,8 +27,9 @@ class ArtistForm extends Component {
       credentials: 'same-origin',
       headers: { 'Authorization': 'Bearer ' + localStorage.getItem('id_token'), 'content-type': 'application/json' },
       method: 'POST',
-    }).then(_ => this.props.history.replace('/'))
-      .catch(error => console.log(error))
+    }).then(_ =>
+      this.props.history.replace('/', { message: "Artist was successfully created." })
+    ).catch(error => console.log(error))
   }
 
   render() {

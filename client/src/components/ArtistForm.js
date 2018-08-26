@@ -34,7 +34,7 @@ class ArtistForm extends Component {
 
   render() {
     return (
-      <Container style={{ marginTop: '7em' }}>
+      <Container className="main-container">
         <Header as='h2' icon textAlign='center' color='teal'>
           <Header.Content>
             Add Artists

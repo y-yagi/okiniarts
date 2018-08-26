@@ -68,7 +68,7 @@ class App extends Component {
     let {arts, art} = this.state
 
     return arts
-      ? <Container style={{ marginTop: '7em' }}>
+      ? <Container className="main-container">
         { this.renderMessage() }
         <Header as='h2' icon textAlign='center' color='teal'>
           <Icon name='unordered list' circular />
@@ -98,14 +98,14 @@ class App extends Component {
           <Grid.Column width={8}>
             {art &&
               <Container text>
-                <Header as='h3' color='teal'>{art.name}<Label>{art.artist.name}</Label> </Header>
+                <Header as='h3' color='teal'>{art.name}<Label as={Link} to='/artist'>{art.artist.name}</Label> </Header>
                 {art.detail && <p>{art.detail}</p>}
               </Container>
             }
           </Grid.Column>
         </Grid>
       </Container>
-      : <Container style={{ marginTop: '7em' }}>
+      : <Container className="main-container">
         <Dimmer active inverted>
           <Loader content='Loading' />
         </Dimmer>

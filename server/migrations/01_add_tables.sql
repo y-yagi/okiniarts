@@ -126,3 +126,16 @@ ALTER TABLE ONLY arts ALTER COLUMN id SET DEFAULT nextval('arts_id_seq'::regclas
 
 ALTER TABLE ONLY museums ALTER COLUMN id SET DEFAULT nextval('museums_id_seq'::regclass);
 
+
+ALTER TABLE ONLY artists
+    ADD CONSTRAINT artists_pkey PRIMARY KEY (id);
+
+ALTER TABLE ONLY arts
+    ADD CONSTRAINT arts_pkey PRIMARY KEY (id);
+
+ALTER TABLE ONLY museums
+    ADD CONSTRAINT museums_pkey PRIMARY KEY (id);
+
+ALTER TABLE ONLY arts
+    ADD CONSTRAINT fk_artist_7620e21578 FOREIGN KEY (artist_id) REFERENCES artists(id);
+

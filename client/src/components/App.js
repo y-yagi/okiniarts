@@ -98,7 +98,7 @@ class App extends Component {
           <Grid.Column width={8}>
             {art &&
               <Container text>
-                <Header as='h3' color='teal'>{art.name}<Label as={Link} to='/artist'>{art.artist.name}</Label> </Header>
+                <Header as='h3' color='teal'>{art.name}<Label as={Link} to={`/artists/${art.artist.id}`}>{art.artist.name}</Label> </Header>
                 {art.detail && <p>{art.detail}</p>}
               </Container>
             }

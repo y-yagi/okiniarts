@@ -114,7 +114,7 @@ func createArtist(c echo.Context) error {
 
 func getArtist(c echo.Context) error {
 	id, _ := strconv.Atoi(c.Param("id"))
-	a := &Artist{Id: id}
+	a := new(Artist)
 	if err := db.Model(a).Where("user_identifier = ? AND id = ?", extractUserID(c), id).Select(); err != nil {
 		return err
 	}
@@ -124,7 +124,7 @@ func getArtist(c echo.Context) error {
 
 func updateArtist(c echo.Context) error {
 	id, _ := strconv.Atoi(c.Param("id"))
-	a := &Artist{Id: id}
+	a := new(Artist)
 	if err := db.Model(a).Where("user_identifier = ? AND id = ?", extractUserID(c), id).Select(); err != nil {
 		return err
 	}
@@ -143,7 +143,7 @@ func updateArtist(c echo.Context) error {
 
 func deleteArtist(c echo.Context) error {
 	id, _ := strconv.Atoi(c.Param("id"))
-	a := &Artist{Id: id}
+	a := new(Artist)
 	if err := db.Model(a).Where("user_identifier = ? AND id = ?", extractUserID(c), id).Select(); err != nil {
 		return err
 	}

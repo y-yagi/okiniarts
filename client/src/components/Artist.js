@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { fetchWithAuth } from "../fetch";
 import {
   Container,
   Header,
@@ -21,18 +22,8 @@ class Artist extends Component {
     this.getArtist(id);
   }
 
-  fetch(endpoint) {
-    return window
-      .fetch(endpoint, {
-        credentials: "same-origin",
-        headers: { Authorization: "Bearer " + localStorage.getItem("id_token") }
-      })
-      .then(response => response.json())
-      .catch(error => console.log(error));
-  }
-
   getArtist(id) {
-    this.fetch(`/api/artists/${id}`).then(artist =>
+    fetchWithAuth(`/api/artists/${id}`).then(artist =>
       this.setState({ artist: artist })
     );
   }

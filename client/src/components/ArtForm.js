@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { fetchWithAuth } from "../fetch";
 import {
   Container,
   Header,
@@ -29,18 +30,8 @@ class ArtForm extends Component {
     this.getArtists();
   }
 
-  fetch(endpoint) {
-    return window
-      .fetch(endpoint, {
-        credentials: "same-origin",
-        headers: { Authorization: "Bearer " + localStorage.getItem("id_token") }
-      })
-      .then(response => response.json())
-      .catch(error => console.log(error));
-  }
-
   getArtists() {
-    this.fetch(`/api/artists`).then(artists =>
+    fetchWithAuth(`/api/artists`).then(artists =>
       this.setState({ artists: artists })
     );
   }

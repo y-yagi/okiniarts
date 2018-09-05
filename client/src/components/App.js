@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { fetchWithAuth } from "../fetch";
 import {
   Container,
   Header,
@@ -38,18 +39,8 @@ class App extends Component {
     this.props.auth.logout();
   }
 
-  fetch(endpoint) {
-    return window
-      .fetch(endpoint, {
-        credentials: "same-origin",
-        headers: { Authorization: "Bearer " + localStorage.getItem("id_token") }
-      })
-      .then(response => response.json())
-      .catch(error => console.log(error));
-  }
-
   getArts() {
-    this.fetch("/api/arts").then(arts => {
+    fetchWithAuth("/api/arts").then(arts => {
       if (arts && arts.length) {
         this.setState({ arts: arts });
         this.getArt(arts[0].id);
@@ -60,7 +51,7 @@ class App extends Component {
   }
 
   getArt(id) {
-    this.fetch(`/api/arts/${id}`).then(art => this.setState({ art: art }));
+    fetchWithAuth(`/api/arts/${id}`).then(art => this.setState({ art: art }));
   }
 
   renderMessage() {

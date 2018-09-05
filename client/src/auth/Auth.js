@@ -1,6 +1,6 @@
-import history from '../history';
-import * as auth0 from 'auth0-js';
-import { AUTH_CONFIG } from './auth0-variables.js';
+import history from "../history";
+import * as auth0 from "auth0-js";
+import { AUTH_CONFIG } from "./auth0-variables.js";
 
 export default class Auth {
   auth0 = new auth0.WebAuth({
@@ -8,8 +8,8 @@ export default class Auth {
     clientID: AUTH_CONFIG.clientId,
     redirectUri: AUTH_CONFIG.callbackUrl,
     audience: `https://${AUTH_CONFIG.domain}/userinfo`,
-    responseType: 'token id_token',
-    scope: 'openid'
+    responseType: "token id_token",
+    scope: "openid"
   });
 
   constructor() {
@@ -27,9 +27,9 @@ export default class Auth {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult);
-        history.replace('/');
+        history.replace("/");
       } else if (err) {
-        history.replace('/');
+        history.replace("/");
         console.log(err);
         alert(`Error: ${err.error}. Check the console for further details.`);
       }
@@ -37,22 +37,24 @@ export default class Auth {
   }
 
   setSession(authResult) {
-    let expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
-    localStorage.setItem('access_token', authResult.accessToken);
-    localStorage.setItem('id_token', authResult.idToken);
-    localStorage.setItem('expires_at', expiresAt);
-    history.replace('/');
+    let expiresAt = JSON.stringify(
+      authResult.expiresIn * 1000 + new Date().getTime()
+    );
+    localStorage.setItem("access_token", authResult.accessToken);
+    localStorage.setItem("id_token", authResult.idToken);
+    localStorage.setItem("expires_at", expiresAt);
+    history.replace("/");
   }
 
   logout() {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('id_token');
-    localStorage.removeItem('expires_at');
-    history.replace('/login');
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("id_token");
+    localStorage.removeItem("expires_at");
+    history.replace("/login");
   }
 
   isAuthenticated() {
-    let expiresAt = JSON.parse(localStorage.getItem('expires_at'));
+    let expiresAt = JSON.parse(localStorage.getItem("expires_at"));
     return new Date().getTime() < expiresAt;
   }
 }

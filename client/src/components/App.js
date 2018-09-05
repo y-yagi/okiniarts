@@ -79,7 +79,7 @@ class App extends Component {
         <Divider hidden section />
         <div>
           <Button primary floated='right' as={Link} to='/artists/new'>Add artist</Button>
-          <Button primary floated='right'>Add art</Button>
+          <Button primary floated='right' as={Link} to='/arts/new'>Add art</Button>
         </div>
         <Divider hidden section />
         <Grid>

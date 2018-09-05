@@ -10,4 +10,5 @@ COPY Gopkg.toml Gopkg.lock ./
 RUN dep ensure -vendor-only
 
 COPY main.go /go/src/github.com/y-yagi/okiniarts
+COPY handlers.go /go/src/github.com/y-yagi/okiniarts
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix nocgo -o /server .

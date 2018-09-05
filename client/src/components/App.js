@@ -111,7 +111,14 @@ class App extends Component {
             {art && (
               <Container text>
                 <Header as="h3" color="teal">
-                  {art.name}
+                  <Label
+                    color="teal"
+                    size="big"
+                    as={Link}
+                    to={`/arts/${art.id}`}
+                  >
+                    {art.name}
+                  </Label>
                   <Label as={Link} to={`/artists/${art.artist.id}`}>
                     {art.artist.name}
                   </Label>{" "}

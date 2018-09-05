@@ -46,6 +46,7 @@ func createServer() *echo.Echo {
 
 	e.Static("/static", "public/static")
 	e.File("/", "public/index.html")
+	e.File("/callback", "public/index.html")
 	addRoutes(e)
 
 	return e

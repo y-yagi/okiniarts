@@ -3,6 +3,7 @@ package main
 import (
 	"io/ioutil"
 	"net/http"
+	"os"
 	"strconv"
 
 	jwt "github.com/dgrijalva/jwt-go"
@@ -161,7 +162,12 @@ func deleteArtist(c echo.Context) error {
 }
 
 func auth0Key() interface{} {
-	pem, _ := ioutil.ReadFile("auth0_pubkey")
+	pem := []byte(os.Getenv("AUTH0_PUBKEY"))
+
+	if len(pem) == 0 {
+		pem, _ = ioutil.ReadFile("auth0_pubkey")
+	}
+
 	key, _ := jwt.ParseRSAPublicKeyFromPEM(pem)
 	return key
 }

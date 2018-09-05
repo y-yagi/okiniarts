@@ -26,7 +26,6 @@ class ArtForm extends Component {
   }
 
   componentDidMount() {
-    const id = this.props.match.params.id;
     this.getArtists();
   }
 
@@ -57,14 +56,14 @@ class ArtForm extends Component {
   handleArtistChange(event) {
     let name = "";
 
-    if (event.target.children.length == 0) {
+    if (event.target.children.length === 0) {
       name = event.target.textContent;
     } else {
       name = event.target.children[0].textContent;
     }
 
     this.artist_id = this.state.artists.find(a => {
-      return a.name == name;
+      return a.name === name;
     }).id;
   }
 
@@ -94,7 +93,7 @@ class ArtForm extends Component {
 
   artistOptions() {
     let options = [];
-    this.state.artists.map(a => {
+    this.state.artists.forEach(a => {
       options.push({ key: a.id, value: a.id, text: a.name });
     });
     return options;

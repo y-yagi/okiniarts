@@ -3,13 +3,11 @@ import { Link } from "react-router-dom";
 import {
   Container,
   Header,
-  Segment,
   Button,
   Icon,
   Dimmer,
   Loader,
   Divider,
-  Form,
   Grid,
   Label,
   Message

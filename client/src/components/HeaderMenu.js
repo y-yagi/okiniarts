@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Menu, Container, Image } from "semantic-ui-react";
+import { Menu, Container } from "semantic-ui-react";
 
 class HeaderMenu extends Component {
   logout() {

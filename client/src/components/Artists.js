@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { fetchWithAuth } from "../fetch";
 import {
   Container,
@@ -15,7 +16,6 @@ class Artists extends Component {
     super();
     this.state = {};
     this.getArtists = this.getArtists.bind(this);
-    this.handleDestroy = this.handleDestroy.bind(this);
   }
 
   componentDidMount() {
@@ -26,24 +26,6 @@ class Artists extends Component {
     fetchWithAuth(`/api/artists`).then(artists =>
       this.setState({ artists: artists })
     );
-  }
-
-  handleDestroy(id) {
-    return window
-      .fetch(`/api/artists/${id}`, {
-        credentials: "same-origin",
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("id_token"),
-          "content-type": "application/json"
-        },
-        method: "DELETE"
-      })
-      .then(_ =>
-        this.props.history.replace("/", {
-          message: "Artist was successfully deleted."
-        })
-      )
-      .catch(error => console.log(error));
   }
 
   render() {
@@ -58,22 +40,17 @@ class Artists extends Component {
         <Table celled>
           <Table.Header>
             <Table.Row>
-              <Table.HeaderCell>Name</Table.HeaderCell>
-              <Table.HeaderCell>Action</Table.HeaderCell>
+              <Table.HeaderCell />
             </Table.Row>
           </Table.Header>
           <Table.Body>
             {Object.keys(artists).map(key => {
               return (
                 <Table.Row key={key}>
-                  <Table.Cell>{artists[key].name}</Table.Cell>
                   <Table.Cell>
-                    <Button
-                      color="red"
-                      onClick={() => this.handleDestroy(artists[key].id)}
-                    >
-                      Destroy
-                    </Button>
+                    <Link to={`/artists/${artists[key].id}`}>
+                      {artists[key].name}
+                    </Link>
                   </Table.Cell>
                 </Table.Row>
               );

@@ -6,15 +6,18 @@ import {
   Button,
   Dimmer,
   Loader,
-  Divider
+  Divider,
+  Confirm
 } from "semantic-ui-react";
 
 class Art extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = { openConfirm: false };
     this.getArt = this.getArt.bind(this);
     this.handleDestroy = this.handleDestroy.bind(this);
+    this.handleConfirm = this.handleConfirm.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
   }
 
   componentDidMount() {
@@ -27,6 +30,10 @@ class Art extends Component {
   }
 
   handleDestroy() {
+    this.setState({ openConfirm: true });
+  }
+
+  handleConfirm() {
     let { art } = this.state;
 
     return window
@@ -46,8 +53,12 @@ class Art extends Component {
       .catch(error => console.log(error));
   }
 
+  handleCancel() {
+    this.setState({ openConfirm: false });
+  }
+
   render() {
-    let { art } = this.state;
+    let { art, openConfirm } = this.state;
 
     return art ? (
       <Container className="main-container">
@@ -63,6 +74,11 @@ class Art extends Component {
           >
             Destroy
           </Button>
+          <Confirm
+            open={openConfirm}
+            onCancel={() => this.handleCancel()}
+            onConfirm={() => this.handleConfirm()}
+          />
         </div>
         <Divider hidden section />
         <Container text>{art.detail}</Container>

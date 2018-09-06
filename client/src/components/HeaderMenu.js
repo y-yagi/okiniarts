@@ -17,6 +17,9 @@ class HeaderMenu extends Component {
           <Menu.Item as={Link} to="/">
             Home
           </Menu.Item>
+          <Menu.Item as={Link} to="/artists">
+            Artists
+          </Menu.Item>
           <Menu.Item as="a" onClick={this.logout.bind(this)}>
             Logout
           </Menu.Item>

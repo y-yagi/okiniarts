@@ -8,8 +8,9 @@ import (
 	"github.com/labstack/echo/middleware"
 )
 
+// Art is type for art data
 type Art struct {
-	Id             int    `json:"id"`
+	ID             int    `json:"id"`
 	Name           string `json:"name"`
 	Detail         string `json:"detail"`
 	ArtistID       int    `json:"artist_id"`
@@ -17,8 +18,9 @@ type Art struct {
 	Artist         Artist `json:"artist"`
 }
 
+// Artist is type for artist data
 type Artist struct {
-	Id             int    `json:"id"`
+	ID             int    `json:"id"`
 	Name           string `json:"name"`
 	Detail         string `json:"detail"`
 	UserIdentifier string `json:"-"`

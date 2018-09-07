@@ -42,7 +42,7 @@ func getArts(c echo.Context) error {
 
 func getArt(c echo.Context) error {
 	id, _ := strconv.Atoi(c.Param("id"))
-	art := &Art{Id: id}
+	art := &Art{ID: id}
 	if err := db.Model(art).Relation("Artist").Where("art.user_identifier = ? AND art.id = ?", extractUserID(c), id).Select(); err != nil {
 		return err
 	}

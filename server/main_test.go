@@ -9,10 +9,10 @@ import (
 )
 
 type auth struct {
-	audience      string
-	grant_type    string
-	client_id     string
-	client_secret string
+	audience     string
+	grantType    string
+	clientID     string
+	clientSecret string
 }
 
 func TestGetArts(t *testing.T) {
@@ -22,12 +22,12 @@ func TestGetArts(t *testing.T) {
 		s.Start(addr.String())
 	}()
 
-	reqUrl := &url.URL{
+	reqURL := &url.URL{
 		Scheme: "http",
 		Host:   addr.String(),
 		Path:   "/api/arts",
 	}
-	req, _ := http.NewRequest("GET", reqUrl.String(), nil)
+	req, _ := http.NewRequest("GET", reqURL.String(), nil)
 	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {

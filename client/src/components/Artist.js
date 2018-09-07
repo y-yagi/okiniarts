@@ -72,6 +72,7 @@ class Artist extends Component {
           <Button
             color="red"
             floated="right"
+            disabled={artist.arts !== null}
             onClick={() => this.handleDestroy()}
           >
             Destroy

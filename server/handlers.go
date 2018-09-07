@@ -124,7 +124,7 @@ func createArtist(c echo.Context) error {
 func getArtist(c echo.Context) error {
 	id, _ := strconv.Atoi(c.Param("id"))
 	a := new(Artist)
-	if err := db.Model(a).Where("user_identifier = ? AND id = ?", extractUserID(c), id).Select(); err != nil {
+	if err := db.Model(a).Relation("Arts").Where("user_identifier = ? AND id = ?", extractUserID(c), id).Select(); err != nil {
 		return err
 	}
 

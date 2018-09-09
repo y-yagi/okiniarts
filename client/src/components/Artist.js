@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { fetchWithAuth } from "../fetch";
 import {
   Container,
-  Header,
   Button,
+  Header,
   Dimmer,
   Loader,
   Divider,

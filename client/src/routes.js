@@ -5,6 +5,7 @@ import App from "./components/App";
 import Login from "./components/Login";
 import Callback from "./components/Callback";
 import NewArtist from "./components/NewArtist";
+import EditArtist from "./components/EditArtist";
 import ArtForm from "./components/ArtForm";
 import Artist from "./components/Artist";
 import Artists from "./components/Artists";
@@ -54,6 +55,7 @@ export const makeMainRoutes = () => {
           <PrivateRoute extract path="/arts/new" component={ArtForm} auth={auth} />
           <PrivateRoute extract path="/arts/:id" component={Art} auth={auth} />
           <PrivateRoute extract path="/artists/new" component={NewArtist} auth={auth} />
+          <PrivateRoute extract path="/artists/:id/edit" component={EditArtist} auth={auth} />
           <PrivateRoute extract path="/artists/:id" component={Artist} auth={auth} />
           <PrivateRoute extract path="/artists" component={Artists} auth={auth} />
           <PrivateRoute extract path="/" component={App} auth={auth} />

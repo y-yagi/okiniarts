@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { fetchWithAuth } from "../fetch";
 import {
   Container,
@@ -11,18 +12,19 @@ import {
 } from "semantic-ui-react";
 
 class Artist extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
     this.state = { openConfirm: false };
     this.getArtist = this.getArtist.bind(this);
     this.handleDestroy = this.handleDestroy.bind(this);
     this.handleConfirm = this.handleConfirm.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
+    this.artistId = this.props.match.params.id;
   }
 
   componentDidMount() {
-    const id = this.props.match.params.id;
-    this.getArtist(id);
+    this.getArtist(this.artistId);
   }
 
   getArtist(id) {
@@ -82,6 +84,14 @@ class Artist extends Component {
             onCancel={() => this.handleCancel()}
             onConfirm={() => this.handleConfirm()}
           />
+          <Button
+            primary
+            floated="right"
+            as={Link}
+            to={`/artists/${this.artistId}/edit`}
+          >
+            Edit
+          </Button>
         </div>
         <Divider hidden section />
         <Container text>{artist.detail}</Container>

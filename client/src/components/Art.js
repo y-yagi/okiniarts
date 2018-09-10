@@ -80,12 +80,7 @@ class Art extends Component {
             onCancel={() => this.handleCancel()}
             onConfirm={() => this.handleConfirm()}
           />
-          <Button
-            primary
-            floated="right"
-            as={Link}
-            to={`/arts/${art.id}/edit`}
-          >
+          <Button primary floated="right" as={Link} to={`/arts/${art.id}/edit`}>
             Edit
           </Button>
         </div>

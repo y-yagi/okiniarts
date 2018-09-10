@@ -85,10 +85,16 @@ class ArtForm extends Component {
   artistOptions() {
     let options = [];
     this.state.artists.forEach(a => {
-      const selected = (a.id === this.state.originalArtistId)
-      console.log(a.id)
-      console.log(selected)
-      options.push({ key: a.id, value: a.id, text: a.name, active: selected, selected: selected });
+      const selected = a.id === this.state.originalArtistId;
+      console.log(a.id);
+      console.log(selected);
+      options.push({
+        key: a.id,
+        value: a.id,
+        text: a.name,
+        active: selected,
+        selected: selected
+      });
     });
     return options;
   }

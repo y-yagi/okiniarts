@@ -1,8 +1,5 @@
 import React, { Component } from "react";
-import {
-  Container,
-  Header,
-} from "semantic-ui-react";
+import { Container, Header } from "semantic-ui-react";
 import ArtForm from "./ArtForm";
 
 class EditArt extends Component {
@@ -38,7 +35,11 @@ class EditArt extends Component {
         <Header as="h2" icon textAlign="center" color="teal">
           <Header.Content>Edit Arts</Header.Content>
         </Header>
-        <ArtForm onSubmit={this.onSubmit} history={this.props.history} artId={this.artId} />
+        <ArtForm
+          onSubmit={this.onSubmit}
+          history={this.props.history}
+          artId={this.artId}
+        />
       </Container>
     );
   }

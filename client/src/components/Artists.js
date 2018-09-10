@@ -4,7 +4,6 @@ import { fetchWithAuth } from "../fetch";
 import {
   Container,
   Header,
-  Button,
   Dimmer,
   Loader,
   Divider,

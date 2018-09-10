@@ -4,8 +4,10 @@ import HeaderMenu from "./components/HeaderMenu";
 import App from "./components/App";
 import Login from "./components/Login";
 import Callback from "./components/Callback";
-import ArtistForm from "./components/ArtistForm";
-import ArtForm from "./components/ArtForm";
+import NewArtist from "./components/NewArtist";
+import EditArtist from "./components/EditArtist";
+import NewArt from "./components/NewArt";
+import EditArt from "./components/EditArt";
 import Artist from "./components/Artist";
 import Artists from "./components/Artists";
 import Art from "./components/Art";
@@ -51,9 +53,11 @@ export const makeMainRoutes = () => {
               return <Callback {...props} />;
             }}
           />
-          <PrivateRoute extract path="/arts/new" component={ArtForm} auth={auth} />
+          <PrivateRoute extract path="/arts/new" component={NewArt} auth={auth} />
+          <PrivateRoute extract path="/arts/:id/edit" component={EditArt} auth={auth} />
           <PrivateRoute extract path="/arts/:id" component={Art} auth={auth} />
-          <PrivateRoute extract path="/artists/new" component={ArtistForm} auth={auth} />
+          <PrivateRoute extract path="/artists/new" component={NewArtist} auth={auth} />
+          <PrivateRoute extract path="/artists/:id/edit" component={EditArtist} auth={auth} />
           <PrivateRoute extract path="/artists/:id" component={Artist} auth={auth} />
           <PrivateRoute extract path="/artists" component={Artists} auth={auth} />
           <PrivateRoute extract path="/" component={App} auth={auth} />

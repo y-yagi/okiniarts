@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { fetchWithAuth } from "../fetch";
 import {
   Container,
@@ -79,6 +80,9 @@ class Art extends Component {
             onCancel={() => this.handleCancel()}
             onConfirm={() => this.handleConfirm()}
           />
+          <Button primary floated="right" as={Link} to={`/arts/${art.id}/edit`}>
+            Edit
+          </Button>
         </div>
         <Divider hidden section />
         <Container text>{art.detail}</Container>

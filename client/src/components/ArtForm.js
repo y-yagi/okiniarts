@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { fetchWithAuth } from "../fetch";
 import {
-  Container,
-  Header,
   Button,
   Form,
   TextArea,
@@ -24,10 +22,27 @@ class ArtForm extends Component {
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleDetailChange = this.handleDetailChange.bind(this);
     this.handleArtistChange = this.handleArtistChange.bind(this);
+    this.state = { originalArtistId: "", originalName: "", originalDetail: "" };
   }
 
   componentDidMount() {
+    if (this.props.artId) {
+      this.getArt(this.props.artId);
+    }
     this.getArtists();
+  }
+
+  getArt(id) {
+    fetchWithAuth(`/api/arts/${id}`).then(art => {
+      this.name = art.name;
+      this.detail = art.detail;
+      this.artist_id = art.artist_id;
+      this.setState({
+        originalArtistId: art.artist_id,
+        originalName: art.name,
+        originalDetail: art.detail
+      });
+    });
   }
 
   getArtists() {
@@ -64,69 +79,51 @@ class ArtForm extends Component {
       detail: this.detail,
       artist_id: this.artist_id
     };
-    return window
-      .fetch("/api/arts", {
-        body: JSON.stringify(data),
-        credentials: "same-origin",
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("id_token"),
-          "content-type": "application/json"
-        },
-        method: "POST"
-      })
-      .then(_ =>
-        this.props.history.replace("/", {
-          message: "Art was successfully created."
-        })
-      )
-      .catch(error => console.log(error));
+    this.props.onSubmit(data);
   }
 
   artistOptions() {
     let options = [];
     this.state.artists.forEach(a => {
-      options.push({ key: a.id, value: a.id, text: a.name });
+      const selected = (a.id === this.state.originalArtistId)
+      console.log(a.id)
+      console.log(selected)
+      options.push({ key: a.id, value: a.id, text: a.name, active: selected, selected: selected });
     });
     return options;
   }
 
   render() {
     return this.state.artists ? (
-      <Container className="main-container">
-        <Header as="h2" icon textAlign="center" color="teal">
-          <Header.Content>Add Arts</Header.Content>
-        </Header>
-        <Form onSubmit={this.handleSubmit}>
-          <Form.Field required>
-            <label>Artist</label>
-            <Select
-              placeholder="Select Artist"
-              required
-              options={this.artistOptions()}
-              onChange={this.handleArtistChange}
-            />
-          </Form.Field>
-          <Form.Field required>
-            <label>Name</label>
-            <input
-              placeholder="Name"
-              required
-              onChange={this.handleNameChange}
-            />
-          </Form.Field>
-          <Form.Field>
-            <label>Detail</label>
-            <TextArea placeholder="Detail" onChange={this.handleDetailChange} />
-          </Form.Field>
-          <Button type="submit">Submit</Button>
-        </Form>
-      </Container>
+      <Form onSubmit={this.handleSubmit}>
+        <Form.Field required>
+          <label>Artist</label>
+          <Select
+            placeholder="Select Artist"
+            required
+            options={this.artistOptions()}
+            onChange={this.handleArtistChange}
+          />
+        </Form.Field>
+        <Form.Field required>
+          <label>Name</label>
+          <input
+            placeholder="Name"
+            required
+            onChange={this.handleNameChange}
+            defaultValue={this.state.originalName}
+          />
+        </Form.Field>
+        <Form.Field>
+          <label>Detail</label>
+          <TextArea placeholder="Detail" onChange={this.handleDetailChange} />
+        </Form.Field>
+        <Button type="submit">Submit</Button>
+      </Form>
     ) : (
-      <Container className="main-container">
-        <Dimmer active inverted>
-          <Loader content="Loading" />
-        </Dimmer>
-      </Container>
+      <Dimmer active inverted>
+        <Loader content="Loading" />
+      </Dimmer>
     );
   }
 }

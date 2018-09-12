@@ -16,11 +16,7 @@ type auth struct {
 }
 
 func TestGetArts(t *testing.T) {
-	addr := randomAddress(t)
-	s := createServer()
-	go func() {
-		s.Start(addr.String())
-	}()
+	addr := startServer(t)
 
 	reqURL := &url.URL{
 		Scheme: "http",
@@ -44,6 +40,16 @@ func TestGetArts(t *testing.T) {
 	if actual != expected {
 		t.Errorf("got: %s\nwont: %s", actual, expected)
 	}
+}
+
+func startServer(t *testing.T) net.Addr {
+	addr := randomAddress(t)
+	s := createServer()
+	go func() {
+		s.Start(addr.String())
+	}()
+
+	return addr
 }
 
 func randomAddress(t *testing.T) net.Addr {

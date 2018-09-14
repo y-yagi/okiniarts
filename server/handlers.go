@@ -36,7 +36,6 @@ func getArts(c echo.Context) error {
 	if err := db.Model(&arts).Relation("Artist").Where("art.user_identifier = ?", extractUserID(c)).Select(); err != nil {
 		return err
 	}
-
 	return c.JSON(http.StatusOK, arts)
 }
 
@@ -165,7 +164,11 @@ func auth0Key() interface{} {
 	pem := []byte(os.Getenv("AUTH0_PUBKEY"))
 
 	if len(pem) == 0 {
-		pem, _ = ioutil.ReadFile("auth0_pubkey")
+		keyFile := os.Getenv("PUBKEY")
+		if len(keyFile) == 0 {
+			keyFile = "auth0_pubkey"
+		}
+		pem, _ = ioutil.ReadFile(keyFile)
 	}
 
 	key, _ := jwt.ParseRSAPublicKeyFromPEM(pem)

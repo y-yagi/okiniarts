@@ -14,9 +14,6 @@ import (
 )
 
 func generateTestData() {
-	db.ExecOne("TRUNCATE TABLE artists")
-	db.ExecOne("TRUNCATE TABLE arts")
-
 	a := &Artist{
 		UserIdentifier: "1",
 		Name:           "クロード・モネ",
@@ -37,12 +34,19 @@ func generateTestData() {
 	}
 }
 
+func truncateTestData() {
+	db.Exec("TRUNCATE TABLE arts")
+	db.Exec("TRUNCATE TABLE artists CASCADE")
+}
+
 func TestMain(m *testing.M) {
 	initDB()
 	defer db.Close()
 	generateTestData()
 
 	code := m.Run()
+
+	truncateTestData()
 
 	defer os.Exit(code)
 }

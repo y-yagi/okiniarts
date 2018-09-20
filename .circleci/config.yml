@@ -1,0 +1,51 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/golang:1.11-node-browsers
+      - image: circleci/postgres:10-alpine
+        environment:
+          POSTGRES_USER: ubuntu
+          POSTGRES_DB: okiniarts_test
+
+    working_directory: /go/src/github.com/y-yagi/okiniarts/
+
+    steps:
+      - checkout
+
+      - run:
+          name : Run dep
+          command: |
+            cd server
+            curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+            dep ensure
+
+      - run:
+          name: Run lint
+          command: |
+            cd server
+            go get -u golang.org/x/lint/golint
+            golint -set_exit_status
+
+      - run:
+          name: Run megacheck
+          command: |
+            cd server
+            go get honnef.co/go/tools/cmd/megacheck
+            megacheck
+
+      - run:
+          name: Installing Dependencies
+          command: |
+            sudo apt-get install postgresql-client
+
+      - run:
+          environment:
+            DATABASE_URL: "postgres://ubuntu@localhost:5432/okiniarts_test?sslmode=disable"
+            PUBKEY: "testdata/jwtRS256.key.pub"
+
+          name: Run tests
+          command: |
+            cd server
+            psql -p 5432 -h localhost -U ubuntu okiniarts_test < migrations/01_add_tables.sql
+            go test -v

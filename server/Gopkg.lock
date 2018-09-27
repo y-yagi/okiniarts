@@ -10,7 +10,7 @@
   version = "v3.2.0"
 
 [[projects]]
-  digest = "1:5b14f08247db438a2d11b77aff373b6536028673e38eab87fb5062e07b3b7487"
+  digest = "1:e7f1117ec9d37b59ba6d70bbd8feaa9cd2d1c6f676dc88ee152f5a57908fea4b"
   name = "github.com/go-pg/pg"
   packages = [
     ".",
@@ -21,8 +21,8 @@
     "types",
   ]
   pruneopts = "UT"
-  revision = "c0368cd6ee62269f0a5c3d6c9c02c6d192760bc6"
-  version = "v6.14.3"
+  revision = "514bed76d8f579d6ff8d40294fa77e476a5c1b3f"
+  version = "v6.15.0"
 
 [[projects]]
   branch = "master"
@@ -33,15 +33,15 @@
   revision = "04140366298a54a039076d798123ffa108fff46c"
 
 [[projects]]
-  digest = "1:87f801436ec4799e0e043ab348ff9f3e95b1b3761138158f0950ac67695cc272"
+  digest = "1:9acadb9c8c15b8a9f635a7fa960c9a522b001a3919bc03df92ac26c372476aff"
   name = "github.com/labstack/echo"
   packages = [
     ".",
     "middleware",
   ]
   pruneopts = "UT"
-  revision = "6d227dfea4d2e52cb76856120b3c17f758139b4e"
-  version = "3.3.5"
+  revision = "1abaa3049251d17932e4313c2d6165073fd07fd8"
+  version = "v3.3.6"
 
 [[projects]]
   digest = "1:568171fc14a3d819b112c3e219d351ea7b05e8dad7935c4168c6b3373244a686"
@@ -53,8 +53,8 @@
     "random",
   ]
   pruneopts = "UT"
-  revision = "d6898124de917583f5ff5592ef931d1dfe0ddc05"
-  version = "0.2.6"
+  revision = "2a618302b929cc20862dda3aa6f02f64dbe740dd"
+  version = "v0.2.7"
 
 [[projects]]
   digest = "1:c658e84ad3916da105a761660dcaeb01e63416c8ec7bc62256a9b411a05fcd67"
@@ -65,20 +65,20 @@
   version = "v0.0.9"
 
 [[projects]]
-  digest = "1:d4d17353dbd05cb52a2a52b7fe1771883b682806f68db442b436294926bbfafb"
+  digest = "1:0981502f9816113c9c8c4ac301583841855c8cf4da8c72f696b3ebedf6d0e4e5"
   name = "github.com/mattn/go-isatty"
   packages = ["."]
   pruneopts = "UT"
-  revision = "0360b2af4f38e8d38c7fce2a9f4e702702d73a39"
-  version = "v0.0.3"
+  revision = "6ca4dbf54d38eea1a992b3c722a76a5d1c4cb25c"
+  version = "v0.0.4"
 
 [[projects]]
-  branch = "master"
   digest = "1:c468422f334a6b46a19448ad59aaffdfc0a36b08fdcc1c749a0b29b6453d7e59"
   name = "github.com/valyala/bytebufferpool"
   packages = ["."]
   pruneopts = "UT"
   revision = "e746df99fe4a3986f4d4f79e13c1e0117ce9c2f7"
+  version = "v1.0.0"
 
 [[projects]]
   branch = "master"
@@ -90,22 +90,31 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:35aff791260b519f5766ebbd85eb439f488bd1af407c785738fb951105b2adbd"
+  digest = "1:c83590426ecf1362e77a9054afed570b201de1a353398a6157ecce06583ea024"
+  name = "github.com/vmihailenco/sasl"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "2f13c189728a02f8cc31b3b9cc06047b383c21cc"
+
+[[projects]]
+  branch = "master"
+  digest = "1:773658e839757eac268eaaf2efca19f11695f49f52a65c18777e7673d27bfb86"
   name = "golang.org/x/crypto"
   packages = [
     "acme",
     "acme/autocert",
+    "pbkdf2",
   ]
   pruneopts = "UT"
-  revision = "56440b844dfe139a8ac053f4ecac0b20b79058f4"
+  revision = "0e37d006457bf46f9e6692014ba72ef82c33022c"
 
 [[projects]]
   branch = "master"
-  digest = "1:9ec6ad2659635ba0974dd7e55bf84233523eb4e7535c9a2fddaefc4cc62a3eac"
+  digest = "1:d40e62a7b8e72fdc18e22ceddd3e6025e1d96f228b9a286abf3d3bd96d7d7a51"
   name = "golang.org/x/sys"
   packages = ["unix"]
   pruneopts = "UT"
-  revision = "0ffbfd41fbef8ffcf9b62b0b0aa3a5873ed7a4fe"
+  revision = "c2ed4eda69e7f62900806e4cd6e45f0429f859fa"
 
 [solve-meta]
   analyzer-name = "dep"

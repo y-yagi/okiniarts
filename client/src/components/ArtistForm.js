@@ -59,7 +59,7 @@ class ArtistForm extends Component {
         </Form.Field>
         <Form.Field>
           <label>Detail</label>
-          <TextArea placeholder="Detail" onChange={this.handleDetailChange} />
+          <TextArea placeholder="Detail" onChange={this.handleDetailChange} defaultValue={this.state.originalDetail} />
         </Form.Field>
         <Button type="submit">Submit</Button>
       </Form>

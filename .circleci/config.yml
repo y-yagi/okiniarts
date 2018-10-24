@@ -3,6 +3,8 @@ jobs:
   build:
     docker:
       - image: circleci/golang:1.11-node-browsers
+        environment:
+          GO111MODULE: "on"
       - image: circleci/postgres:10-alpine
         environment:
           POSTGRES_USER: ubuntu
@@ -14,11 +16,11 @@ jobs:
       - checkout
 
       - run:
-          name : Run dep
+          name: Run go mod
           command: |
             cd server
-            curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
-            dep ensure
+            go mod download
+            go mod vendor
 
       - run:
           name: Run lint

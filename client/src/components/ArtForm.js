@@ -22,7 +22,12 @@ class ArtForm extends Component {
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleDetailChange = this.handleDetailChange.bind(this);
     this.handleArtistChange = this.handleArtistChange.bind(this);
-    this.state = { originalArtistId: "", originalName: "", originalDetail: "" };
+    this.state = {
+      originalArtistId: "",
+      originalName: "",
+      originalDetail: "",
+      loading: true
+    };
   }
 
   componentDidMount() {
@@ -47,7 +52,7 @@ class ArtForm extends Component {
 
   getArtists() {
     fetchWithAuth(`/api/artists`).then(artists =>
-      this.setState({ artists: artists })
+      this.setState({ artists: artists, loading: false })
     );
   }
 
@@ -100,7 +105,11 @@ class ArtForm extends Component {
   }
 
   render() {
-    return this.state.artists ? (
+    return this.state.loading ? (
+      <Dimmer active inverted>
+        <Loader content="Loading" />
+      </Dimmer>
+    ) : (
       <Form onSubmit={this.handleSubmit}>
         <Form.Field required>
           <label>Artist</label>
@@ -122,14 +131,14 @@ class ArtForm extends Component {
         </Form.Field>
         <Form.Field>
           <label>Detail</label>
-          <TextArea placeholder="Detail" onChange={this.handleDetailChange} />
+          <TextArea
+            placeholder="Detail"
+            onChange={this.handleDetailChange}
+            defaultValue={this.state.originalDetail}
+          />
         </Form.Field>
         <Button type="submit">Submit</Button>
       </Form>
-    ) : (
-      <Dimmer active inverted>
-        <Loader content="Loading" />
-      </Dimmer>
     );
   }
 }

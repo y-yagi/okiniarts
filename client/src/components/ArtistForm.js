@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { fetchWithAuth } from "../fetch";
-import { Button, Form, TextArea } from "semantic-ui-react";
+import { Button, Form, TextArea, Dimmer, Loader } from "semantic-ui-react";
 
 class ArtistForm extends Component {
   constructor(props) {
     super(props);
+
+    const loading = this.props.artistId ? true : false;
 
     this.name = "";
     this.detail = "";
@@ -12,7 +14,7 @@ class ArtistForm extends Component {
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleDetailChange = this.handleDetailChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.state = { originalName: "", originalDetail: "" };
+    this.state = { originalName: "", originalDetail: "", loading: loading };
   }
 
   componentDidMount() {
@@ -27,7 +29,8 @@ class ArtistForm extends Component {
       this.detail = artist.detail;
       this.setState({
         originalName: artist.name,
-        originalDetail: artist.detail
+        originalDetail: artist.detail,
+        loading: false
       });
     });
   }
@@ -46,7 +49,11 @@ class ArtistForm extends Component {
   }
 
   render() {
-    return (
+    return this.state.loading ? (
+      <Dimmer active inverted>
+        <Loader content="Loading" />
+      </Dimmer>
+    ) : (
       <Form onSubmit={this.handleSubmit}>
         <Form.Field required>
           <label>Name</label>
@@ -59,7 +66,11 @@ class ArtistForm extends Component {
         </Form.Field>
         <Form.Field>
           <label>Detail</label>
-          <TextArea placeholder="Detail" onChange={this.handleDetailChange} defaultValue={this.state.originalDetail} />
+          <TextArea
+            placeholder="Detail"
+            onChange={this.handleDetailChange}
+            defaultValue={this.state.originalDetail}
+          />
         </Form.Field>
         <Button type="submit">Submit</Button>
       </Form>

@@ -6,7 +6,6 @@ services:
     command: /server
     volumes:
       - ./server:/go/src/github.com/y-yagi/okiniarts
-      - /go/src/github.com/y-yagi/okiniarts/vendor
     ports:
       - "3001:3001"
     depends_on:

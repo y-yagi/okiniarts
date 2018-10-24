@@ -6,6 +6,8 @@ github.com/fsnotify/fsnotify v1.4.7 h1:IXs+QLmnXW2CcXuY+8Mzv/fWEsPGWxqefPtCP5CnV
 github.com/fsnotify/fsnotify v1.4.7/go.mod h1:jwhsz4b93w/PPRr/qN1Yymfu8t87LnFCMoQvtojpjFo=
 github.com/go-pg/pg v6.14.3+incompatible h1:/kzYFz51rkNMAUmcu8LoqaQf9fg7+qKuNLMNpSi2Usk=
 github.com/go-pg/pg v6.14.3+incompatible/go.mod h1:a2oXow+aFOrvwcKs3eIA0lNFmMilrxK2sOkB5NWe0vA=
+github.com/go-pg/pg v6.15.0+incompatible h1:jwhQz62bkCc+VqBXyUTHzcESgACF6S9qsHAJigcLYzQ=
+github.com/go-pg/pg v6.15.0+incompatible/go.mod h1:a2oXow+aFOrvwcKs3eIA0lNFmMilrxK2sOkB5NWe0vA=
 github.com/golang/protobuf v1.2.0 h1:P3YflyNX/ehuJFLhxviNdFxQPkGK5cDcApsge1SqnvM=
 github.com/golang/protobuf v1.2.0/go.mod h1:6lQm79b+lXiMfvg/cZm0SGofjICqVBUtrP5yJMmIC1U=
 github.com/hpcloud/tail v1.0.0 h1:nfCOvKYfkgYP8hkirhJocXT2+zOD8yUNjXaWfTlyFKI=
@@ -37,6 +39,8 @@ github.com/valyala/bytebufferpool v0.0.0-20160817181652-e746df99fe4a h1:AOcehBWp
 github.com/valyala/bytebufferpool v0.0.0-20160817181652-e746df99fe4a/go.mod h1:6bBcMArwyJ5K/AmCkWv1jt77kVWyCJ6HpOuEn7z0Csc=
 github.com/valyala/fasttemplate v0.0.0-20170224212429-dcecefd839c4 h1:gKMu1Bf6QINDnvyZuTaACm9ofY+PRh+5vFz4oxBZeF8=
 github.com/valyala/fasttemplate v0.0.0-20170224212429-dcecefd839c4/go.mod h1:50wTf68f99/Zt14pr046Tgt3Lp2vLyFZKzbFXTOabXw=
+github.com/vmihailenco/sasl v0.0.0-20180925064641-2f13c189728a h1:OtCFi4CIagyqhY/qK/y1lKrddzoRSKwm/3yRcWJoZdY=
+github.com/vmihailenco/sasl v0.0.0-20180925064641-2f13c189728a/go.mod h1:PL3B2VvrDEUUKvagXPKVvvmulVvRE2DWIJovqpdpHwI=
 golang.org/x/crypto v0.0.0-20180830192347-182538f80094 h1:rVTAlhYa4+lCfNxmAIEOGQRoD23UqP72M3+rSWVGDTg=
 golang.org/x/crypto v0.0.0-20180830192347-182538f80094/go.mod h1:6SG95UA2DQfeDnfUPMdvaQW0Q7yPrPDi9nlGo2tz2b4=
 golang.org/x/net v0.0.0-20180906233101-161cd47e91fd h1:nTDtHvHSdCn1m6ITfMRqtOd/9+7a3s8RBNOZ3eYZzJA=

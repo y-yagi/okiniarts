@@ -34,7 +34,7 @@ jobs:
           command: |
             cd server
             go get honnef.co/go/tools/cmd/megacheck
-            megacheck
+            GO111MODULE=off megacheck
 
       - run:
           name: Installing Dependencies

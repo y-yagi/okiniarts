@@ -18,6 +18,6 @@ require (
 	github.com/valyala/bytebufferpool v0.0.0-20160817181652-e746df99fe4a // indirect
 	github.com/valyala/fasttemplate v0.0.0-20170224212429-dcecefd839c4 // indirect
 	github.com/vmihailenco/sasl v0.0.0-20180925064641-2f13c189728a // indirect
-	golang.org/x/crypto v0.0.0-20180830192347-182538f80094 // indirect
 	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect
+	mellium.im/sasl v0.2.1 // indirect
 )

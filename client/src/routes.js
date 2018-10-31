@@ -1,4 +1,4 @@
-import React from "react";
+import React, { StrictMode } from "react";
 import { Redirect, Route, Router, Switch } from "react-router-dom";
 import HeaderMenu from "./components/HeaderMenu";
 import App from "./components/App";
@@ -39,30 +39,32 @@ const PrivateRoute = ({ component: Component, auth, ...rest }) => (
 
 export const makeMainRoutes = () => {
   return (
-    <Router history={history}>
-      <div>
-        <Switch>
-          <Route
-            path="/login"
-            render={props => <Login auth={auth} {...props} />}
-          />
-          <Route
-            path="/callback"
-            render={props => {
-              handleAuthentication(props);
-              return <Callback {...props} />;
-            }}
-          />
-          <PrivateRoute extract path="/arts/new" component={NewArt} auth={auth} />
-          <PrivateRoute extract path="/arts/:id/edit" component={EditArt} auth={auth} />
-          <PrivateRoute extract path="/arts/:id" component={Art} auth={auth} />
-          <PrivateRoute extract path="/artists/new" component={NewArtist} auth={auth} />
-          <PrivateRoute extract path="/artists/:id/edit" component={EditArtist} auth={auth} />
-          <PrivateRoute extract path="/artists/:id" component={Artist} auth={auth} />
-          <PrivateRoute extract path="/artists" component={Artists} auth={auth} />
-          <PrivateRoute extract path="/" component={App} auth={auth} />
-        </Switch>
-      </div>
-    </Router>
+    <StrictMode>
+      <Router history={history}>
+        <div>
+          <Switch>
+            <Route
+              path="/login"
+              render={props => <Login auth={auth} {...props} />}
+            />
+            <Route
+              path="/callback"
+              render={props => {
+                handleAuthentication(props);
+                return <Callback {...props} />;
+              }}
+            />
+            <PrivateRoute extract path="/arts/new" component={NewArt} auth={auth} />
+            <PrivateRoute extract path="/arts/:id/edit" component={EditArt} auth={auth} />
+            <PrivateRoute extract path="/arts/:id" component={Art} auth={auth} />
+            <PrivateRoute extract path="/artists/new" component={NewArtist} auth={auth} />
+            <PrivateRoute extract path="/artists/:id/edit" component={EditArtist} auth={auth} />
+            <PrivateRoute extract path="/artists/:id" component={Artist} auth={auth} />
+            <PrivateRoute extract path="/artists" component={Artists} auth={auth} />
+            <PrivateRoute extract path="/" component={App} auth={auth} />
+          </Switch>
+        </div>
+      </Router>
+    </StrictMode>
   );
 };

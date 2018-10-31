@@ -22,6 +22,6 @@
     "pretty": "yarn prettier src/**/*.css src/**/*.js --write"
   },
   "devDependencies": {
-    "prettier": "1.14.2"
+    "prettier": "1.14.3"
   }
 }

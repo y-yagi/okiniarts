@@ -9,7 +9,7 @@ require (
 	github.com/jinzhu/inflection v0.0.0-20180308033659-04140366298a // indirect
 	github.com/kr/pretty v0.1.0 // indirect
 	github.com/kr/pty v1.1.3 // indirect
-	github.com/labstack/echo v3.2.1+incompatible
+	github.com/labstack/echo v3.2.2+incompatible
 	github.com/labstack/gommon v0.2.7 // indirect
 	github.com/mattn/go-colorable v0.0.9 // indirect
 	github.com/mattn/go-isatty v0.0.4 // indirect

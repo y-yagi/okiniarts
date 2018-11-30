@@ -8,7 +8,8 @@ import {
   Dimmer,
   Loader,
   Divider,
-  Confirm
+  Confirm,
+  List
 } from "semantic-ui-react";
 
 class Artist extends Component {
@@ -29,7 +30,7 @@ class Artist extends Component {
 
   getArtist(id) {
     fetchWithAuth(`/api/artists/${id}`).then(artist =>
-      this.setState({ artist: artist })
+      this.setState({ artist: artist, arts: artist.arts })
     );
   }
 
@@ -62,7 +63,7 @@ class Artist extends Component {
   }
 
   render() {
-    let { artist, openConfirm } = this.state;
+    let { artist, arts, openConfirm } = this.state;
 
     return artist ? (
       <Container className="main-container">
@@ -95,6 +96,23 @@ class Artist extends Component {
         </div>
         <Divider hidden section />
         <Container text>{artist.detail}</Container>
+        <Divider section />
+        <Header as="h3" icon textAlign="left" color="teal">
+          Arts
+        </Header>
+        <List horizontal relaxed="very">
+          {Object.keys(arts).map(key => {
+            return (
+              <List.Item>
+                <List.Content>
+                  <List.Header as={Link} key={key} to={`/arts/${arts[key].id}`}>
+                    {arts[key].name}
+                  </List.Header>
+                </List.Content>
+              </List.Item>
+            );
+          })}
+        </List>
       </Container>
     ) : (
       <Container className="main-container">

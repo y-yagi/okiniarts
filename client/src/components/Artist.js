@@ -103,9 +103,9 @@ class Artist extends Component {
         <List horizontal relaxed="very">
           {Object.keys(arts).map(key => {
             return (
-              <List.Item>
+              <List.Item key={key}>
                 <List.Content>
-                  <List.Header as={Link} key={key} to={`/arts/${arts[key].id}`}>
+                  <List.Header as={Link} to={`/arts/${arts[key].id}`}>
                     {arts[key].name}
                   </List.Header>
                 </List.Content>

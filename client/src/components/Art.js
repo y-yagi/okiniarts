@@ -92,6 +92,7 @@ class Art extends Component {
           <a
             href={`https://artsandculture.google.com/search?q=${art.name}`}
             target="_blank"
+            rel="noopener noreferrer"
           >
             Search '{art.name}' in Google Arts &amp; Culture
           </a>

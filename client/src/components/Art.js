@@ -8,7 +8,8 @@ import {
   Dimmer,
   Loader,
   Divider,
-  Confirm
+  Confirm,
+  Message
 } from "semantic-ui-react";
 
 class Art extends Component {
@@ -86,6 +87,16 @@ class Art extends Component {
         </div>
         <Divider hidden section />
         <Container text>{art.detail}</Container>
+        <Divider hidden section />
+        <Message info>
+          <a
+            href={`https://artsandculture.google.com/search?q=${art.name}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Search '{art.name}' in Google Arts &amp; Culture
+          </a>
+        </Message>
       </Container>
     ) : (
       <Container className="main-container">

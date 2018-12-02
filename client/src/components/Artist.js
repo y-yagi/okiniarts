@@ -9,7 +9,8 @@ import {
   Loader,
   Divider,
   Confirm,
-  List
+  List,
+  Message
 } from "semantic-ui-react";
 
 class Artist extends Component {
@@ -96,6 +97,16 @@ class Artist extends Component {
         </div>
         <Divider hidden section />
         <Container text>{artist.detail}</Container>
+        <Divider hidden section />
+        <Message info>
+          <a
+            href={`https://artsandculture.google.com/search?q=${artist.name}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Search '{artist.name}' in Google Arts &amp; Culture
+          </a>
+        </Message>
         <Divider section />
         <Header as="h3" icon textAlign="left" color="teal">
           Arts

@@ -10,6 +10,7 @@ import {
   Divider,
   Confirm
 } from "semantic-ui-react";
+import Iframe from 'react-iframe'
 
 class Art extends Component {
   constructor() {
@@ -86,6 +87,8 @@ class Art extends Component {
         </div>
         <Divider hidden section />
         <Container text>{art.detail}</Container>
+        <Divider section />
+        <Iframe url="https://artsandculture.google.com/search?q=%E5%85%A5%E7%9B%B8%E6%A1%9C" />
       </Container>
     ) : (
       <Container className="main-container">

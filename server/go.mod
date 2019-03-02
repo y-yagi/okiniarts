@@ -1,6 +1,6 @@
 module github.com/y-yagi/okiniarts/server
 
-// go: no requirements found in Gopkg.lock
+// +heroku goVersion go1.12
 
 require (
 	github.com/davecgh/go-spew v1.1.1 // indirect

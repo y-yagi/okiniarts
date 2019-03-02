@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/golang:1.11-node-browsers
+      - image: circleci/golang:1.12-node-browsers
         environment:
           GO111MODULE: "on"
       - image: circleci/postgres:10-alpine

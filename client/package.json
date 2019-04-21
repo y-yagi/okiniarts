@@ -7,7 +7,7 @@
     "auth0-js": "^9.10.2",
     "react": "^16.8.6",
     "react-check-auth": "^0.2.0-alpha.1",
-    "react-dom": "^16.8.5",
+    "react-dom": "^16.8.6",
     "react-router": "^5.0.0",
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",

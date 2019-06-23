@@ -30,11 +30,11 @@ jobs:
             golint -set_exit_status
 
       - run:
-          name: Run megacheck
+          name: Run staticcheck
           command: |
             cd server
-            go get honnef.co/go/tools/cmd/megacheck
-            GO111MODULE=off megacheck
+            go get honnef.co/go/tools/cmd/staticcheck
+            GO111MODULE=off staticcheck
 
       - run:
           name: Installing Dependencies

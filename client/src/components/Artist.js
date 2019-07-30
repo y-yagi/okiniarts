@@ -111,19 +111,23 @@ class Artist extends Component {
         <Header as="h3" icon textAlign="left" color="teal">
           Arts
         </Header>
-        <List horizontal relaxed="very">
-          {Object.keys(arts).map(key => {
-            return (
-              <List.Item key={key}>
-                <List.Content>
-                  <List.Header as={Link} to={`/arts/${arts[key].id}`}>
-                    {arts[key].name}
-                  </List.Header>
-                </List.Content>
-              </List.Item>
-            );
-          })}
-        </List>
+        {arts && arts.length ? (
+          <List horizontal relaxed="very">
+            {Object.keys(arts).map(key => {
+              return (
+                <List.Item key={key}>
+                  <List.Content>
+                    <List.Header as={Link} to={`/arts/${arts[key].id}`}>
+                      {arts[key].name}
+                    </List.Header>
+                  </List.Content>
+                </List.Item>
+              );
+            })}
+          </List>
+        ) : (
+          <Container textAlign="center">Arts not registered.</Container>
+        )}
       </Container>
     ) : (
       <Container className="main-container">

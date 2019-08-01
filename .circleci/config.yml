@@ -1,6 +1,10 @@
-version: 2
+version: 2.1
+
+orbs:
+  cypress: cypress-io/cypress@1
+
 jobs:
-  build:
+  unit-test:
     docker:
       - image: circleci/golang:1.12-node-browsers
         environment:
@@ -51,3 +55,80 @@ jobs:
             cd server
             psql -p 5432 -h localhost -U ubuntu okiniarts_test < migrations/01_add_tables.sql
             go test -v
+
+      - run:
+          name: Build server
+          command: |
+            cd server
+            GO111MODULE=on CGO_ENABLED=0 GOOS=linux go build -a -installsuffix nocgo -o ./okiniarts-server .
+            mkdir ~/server && mv ./okiniarts-server  ~/server
+
+      - persist_to_workspace:
+          root: ~/
+          paths: server
+
+  e2e-test:
+    docker:
+      - image: circleci/golang:1.12-node-browsers
+      - image: circleci/postgres:10-alpine
+        environment:
+          POSTGRES_USER: ubuntu
+          POSTGRES_DB: okiniarts_test
+
+    steps:
+      - attach_workspace:
+          at: ~/
+
+      - run:
+          name: Installing Dependencies
+          command: |
+            sudo apt-get install postgresql-client
+
+      - run:
+          name: Create tables
+          command: |
+            psql -p 5432 -h localhost -U ubuntu okiniarts_test < ~/project/server/migrations/01_add_tables.sql
+
+      - run:
+          environment:
+            DATABASE_URL: "postgres://ubuntu@localhost:5432/okiniarts_test?sslmode=disable"
+            PUBKEY: "/root/project/server/testdata/jwtRS256.key.pub"
+
+          name: Start API server
+          background: true
+          command: |
+            cd ~/
+            ./server/okiniarts-server
+
+      - run:
+          name: Start client
+          background: true
+          command: |
+            cd ~/project/client
+            yarn start
+
+      - run:
+          name: Wait start client
+          command: |
+            sudo npm install -g wait-on
+            wait-on http://localhost:3000
+
+      - run:
+          name: Run Cypress tests
+          command: |
+            cd ~/project/client
+            yarn run cypress run
+
+
+workflows:
+  build:
+    jobs:
+      - unit-test
+      - cypress/install:
+          requires:
+            - unit-test
+          working_directory: ~/project/client
+          yarn: true
+      - e2e-test:
+          requires:
+            - cypress/install

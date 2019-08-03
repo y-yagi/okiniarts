@@ -90,21 +90,27 @@ jobs:
             psql -p 5432 -h localhost -U ubuntu okiniarts_test < ~/project/server/migrations/01_add_tables.sql
 
       - run:
+          name: Import seeds
+          command: |
+            psql -p 5432 -h localhost -U ubuntu okiniarts_test < ~/project/client/cypress/fixtures/seeds.sql
+
+      - run:
           environment:
             DATABASE_URL: "postgres://ubuntu@localhost:5432/okiniarts_test?sslmode=disable"
-            PUBKEY: "/root/project/server/testdata/jwtRS256.key.pub"
 
           name: Start API server
           background: true
           command: |
-            cd ~/
-            ./server/okiniarts-server
+            cd ~/server
+            echo $ENCODED_PUBKEY | base64 -d > auth0_pubkey
+            ./okiniarts-server
 
       - run:
           name: Start client
           background: true
           command: |
             cd ~/project/client
+            sed -i -e "s/server:3001/localhost:3001/g" package.json
             yarn start
 
       - run:
@@ -118,6 +124,12 @@ jobs:
           command: |
             cd ~/project/client
             yarn run cypress run
+
+      - store_artifacts:
+          path: /home/circleci/project/client/cypress/screenshots
+
+      - store_artifacts:
+          path: /home/circleci/project/client/cypress/videos
 
 
 workflows:

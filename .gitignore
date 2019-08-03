@@ -1,3 +1,4 @@
 server/server
 server/vendor/
 client/node_modules/
+client/cypress.env.json

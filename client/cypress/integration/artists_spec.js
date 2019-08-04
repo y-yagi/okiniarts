@@ -21,6 +21,7 @@ describe('Create atrist', function() {
 
   it('Show Artist', () => {
     cy.get('[href="/artists"]').click()
+    cy.contains('クロード・モネ')
     cy.get('a').contains('クロード・モネ').click()
 
     cy.contains('印象派を代表するフランスの画家')
@@ -35,6 +36,7 @@ describe('Create atrist', function() {
     cy.contains('Artist was successfully created')
 
     cy.get('[href="/artists"]').click()
+    cy.contains('下村観山')
     cy.get('a').contains('下村観山').click()
 
     cy.contains('昭和初期の日本画家。')

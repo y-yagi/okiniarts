@@ -171,9 +171,6 @@ func auth0Key() interface{} {
 		pem, _ = ioutil.ReadFile(keyFile)
 	}
 
-	if len(pem) == 0 {
-		panic("pubkey need to specified")
-	}
 	key, _ := jwt.ParseRSAPublicKeyFromPEM(pem)
 	return key
 }

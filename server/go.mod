@@ -1,6 +1,6 @@
 module github.com/y-yagi/okiniarts/server
 
-// +heroku goVersion go1.12
+// +heroku goVersion go1.13
 
 require (
 	github.com/davecgh/go-spew v1.1.1 // indirect

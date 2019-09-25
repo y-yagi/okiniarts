@@ -1,4 +1,4 @@
-FROM golang:1.11
+FROM golang:1.13
 
 RUN mkdir -p /go/src/github.com/y-yagi/okiniarts
 WORKDIR /go/src/github.com/y-yagi/okiniarts

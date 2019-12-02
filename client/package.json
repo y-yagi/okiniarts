@@ -22,7 +22,7 @@
     "pretty": "yarn prettier src/**/*.css src/**/*.js --write"
   },
   "devDependencies": {
-    "cypress": "^3.6.1",
+    "cypress": "^3.7.0",
     "prettier": "1.19.1"
   },
   "browserslist": [

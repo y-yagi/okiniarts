@@ -23,7 +23,7 @@
   },
   "devDependencies": {
     "cypress": "^4.1.0",
-    "prettier": "1.19.1"
+    "prettier": "2.0.3"
   },
   "browserslist": [
     ">0.2%",

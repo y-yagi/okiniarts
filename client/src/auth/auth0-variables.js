@@ -5,5 +5,5 @@ const callbackUrl =
 export const AUTH_CONFIG = {
   domain: "okiniarts.auth0.com",
   clientId: "JBfFodKF3HidREciZunc_0u1OX8PaKhO",
-  callbackUrl: callbackUrl
+  callbackUrl: callbackUrl,
 };

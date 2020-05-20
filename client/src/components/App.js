@@ -11,7 +11,7 @@ import {
   Divider,
   Grid,
   Label,
-  Message
+  Message,
 } from "semantic-ui-react";
 
 class App extends Component {
@@ -40,7 +40,7 @@ class App extends Component {
   }
 
   getArts() {
-    fetchWithAuth("/api/arts").then(arts => {
+    fetchWithAuth("/api/arts").then((arts) => {
       if (arts && arts.length) {
         this.setState({ arts: arts });
         this.getArt(arts[0].id);
@@ -51,7 +51,7 @@ class App extends Component {
   }
 
   getArt(id) {
-    fetchWithAuth(`/api/arts/${id}`).then(art => this.setState({ art: art }));
+    fetchWithAuth(`/api/arts/${id}`).then((art) => this.setState({ art: art }));
   }
 
   renderMessage() {
@@ -90,7 +90,7 @@ class App extends Component {
           <Grid.Column width={4}>
             {arts && arts.length ? (
               <Button.Group color="teal" vertical widths={arts.length}>
-                {Object.keys(arts).map(key => {
+                {Object.keys(arts).map((key) => {
                   return (
                     <Button
                       active={art && art.id === arts[key].id}

@@ -16,16 +16,16 @@ class NewArtist extends Component {
         credentials: "same-origin",
         headers: {
           Authorization: "Bearer " + localStorage.getItem("id_token"),
-          "content-type": "application/json"
+          "content-type": "application/json",
         },
-        method: "POST"
+        method: "POST",
       })
-      .then(_ =>
+      .then((_) =>
         this.props.history.replace("/", {
-          message: "Artist was successfully created."
+          message: "Artist was successfully created.",
         })
       )
-      .catch(error => console.log(error));
+      .catch((error) => console.log(error));
   }
 
   render() {

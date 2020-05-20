@@ -24,13 +24,13 @@ class ArtistForm extends Component {
   }
 
   getArtist(id) {
-    fetchWithAuth(`/api/artists/${id}`).then(artist => {
+    fetchWithAuth(`/api/artists/${id}`).then((artist) => {
       this.name = artist.name;
       this.detail = artist.detail;
       this.setState({
         originalName: artist.name,
         originalDetail: artist.detail,
-        loading: false
+        loading: false,
       });
     });
   }

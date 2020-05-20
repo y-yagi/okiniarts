@@ -6,7 +6,7 @@ import {
   TextArea,
   Select,
   Dimmer,
-  Loader
+  Loader,
 } from "semantic-ui-react";
 
 class ArtForm extends Component {
@@ -26,7 +26,7 @@ class ArtForm extends Component {
       originalArtistId: "",
       originalName: "",
       originalDetail: "",
-      loading: true
+      loading: true,
     };
   }
 
@@ -38,20 +38,20 @@ class ArtForm extends Component {
   }
 
   getArt(id) {
-    fetchWithAuth(`/api/arts/${id}`).then(art => {
+    fetchWithAuth(`/api/arts/${id}`).then((art) => {
       this.name = art.name;
       this.detail = art.detail;
       this.artist_id = art.artist_id;
       this.setState({
         originalArtistId: art.artist_id,
         originalName: art.name,
-        originalDetail: art.detail
+        originalDetail: art.detail,
       });
     });
   }
 
   getArtists() {
-    fetchWithAuth(`/api/artists`).then(artists =>
+    fetchWithAuth(`/api/artists`).then((artists) =>
       this.setState({ artists: artists, loading: false })
     );
   }
@@ -73,7 +73,7 @@ class ArtForm extends Component {
       name = event.target.children[0].textContent;
     }
 
-    this.artist_id = this.state.artists.find(a => {
+    this.artist_id = this.state.artists.find((a) => {
       return a.name === name;
     }).id;
   }
@@ -82,14 +82,14 @@ class ArtForm extends Component {
     const data = {
       name: this.name,
       detail: this.detail,
-      artist_id: this.artist_id
+      artist_id: this.artist_id,
     };
     this.props.onSubmit(data);
   }
 
   artistOptions() {
     let options = [];
-    this.state.artists.forEach(a => {
+    this.state.artists.forEach((a) => {
       const selected = a.id === this.state.originalArtistId;
       console.log(a.id);
       console.log(selected);
@@ -98,7 +98,7 @@ class ArtForm extends Component {
         value: a.id,
         text: a.name,
         active: selected,
-        selected: selected
+        selected: selected,
       });
     });
     return options;

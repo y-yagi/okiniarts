@@ -17,16 +17,16 @@ class EditArt extends Component {
         credentials: "same-origin",
         headers: {
           Authorization: "Bearer " + localStorage.getItem("id_token"),
-          "content-type": "application/json"
+          "content-type": "application/json",
         },
-        method: "PUT"
+        method: "PUT",
       })
-      .then(_ =>
+      .then((_) =>
         this.props.history.replace("/", {
-          message: "Art was successfully updated."
+          message: "Art was successfully updated.",
         })
       )
-      .catch(error => console.log(error));
+      .catch((error) => console.log(error));
   }
 
   render() {

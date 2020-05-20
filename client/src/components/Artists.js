@@ -7,7 +7,7 @@ import {
   Dimmer,
   Loader,
   Divider,
-  Table
+  Table,
 } from "semantic-ui-react";
 
 class Artists extends Component {
@@ -22,7 +22,7 @@ class Artists extends Component {
   }
 
   getArtists() {
-    fetchWithAuth(`/api/artists`).then(artists =>
+    fetchWithAuth(`/api/artists`).then((artists) =>
       this.setState({ artists: artists })
     );
   }
@@ -43,7 +43,7 @@ class Artists extends Component {
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            {Object.keys(artists).map(key => {
+            {Object.keys(artists).map((key) => {
               return (
                 <Table.Row key={key}>
                   <Table.Cell>

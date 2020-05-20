@@ -9,7 +9,7 @@ import {
   Loader,
   Divider,
   Confirm,
-  Message
+  Message,
 } from "semantic-ui-react";
 
 class Art extends Component {
@@ -28,7 +28,7 @@ class Art extends Component {
   }
 
   getArt(id) {
-    fetchWithAuth(`/api/arts/${id}`).then(art => this.setState({ art: art }));
+    fetchWithAuth(`/api/arts/${id}`).then((art) => this.setState({ art: art }));
   }
 
   handleDestroy() {
@@ -43,16 +43,16 @@ class Art extends Component {
         credentials: "same-origin",
         headers: {
           Authorization: "Bearer " + localStorage.getItem("id_token"),
-          "content-type": "application/json"
+          "content-type": "application/json",
         },
-        method: "DELETE"
+        method: "DELETE",
       })
-      .then(_ =>
+      .then((_) =>
         this.props.history.replace("/", {
-          message: "Art was successfully deleted."
+          message: "Art was successfully deleted.",
         })
       )
-      .catch(error => console.log(error));
+      .catch((error) => console.log(error));
   }
 
   handleCancel() {

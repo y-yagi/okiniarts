@@ -10,7 +10,7 @@ import {
   Divider,
   Confirm,
   List,
-  Message
+  Message,
 } from "semantic-ui-react";
 
 class Artist extends Component {
@@ -30,7 +30,7 @@ class Artist extends Component {
   }
 
   getArtist(id) {
-    fetchWithAuth(`/api/artists/${id}`).then(artist =>
+    fetchWithAuth(`/api/artists/${id}`).then((artist) =>
       this.setState({ artist: artist, arts: artist.arts })
     );
   }
@@ -47,16 +47,16 @@ class Artist extends Component {
         credentials: "same-origin",
         headers: {
           Authorization: "Bearer " + localStorage.getItem("id_token"),
-          "content-type": "application/json"
+          "content-type": "application/json",
         },
-        method: "DELETE"
+        method: "DELETE",
       })
-      .then(_ =>
+      .then((_) =>
         this.props.history.replace("/", {
-          message: "Artist was successfully deleted."
+          message: "Artist was successfully deleted.",
         })
       )
-      .catch(error => console.log(error));
+      .catch((error) => console.log(error));
   }
 
   handleCancel() {
@@ -113,7 +113,7 @@ class Artist extends Component {
         </Header>
         {arts && arts.length ? (
           <List horizontal relaxed="very">
-            {Object.keys(arts).map(key => {
+            {Object.keys(arts).map((key) => {
               return (
                 <List.Item key={key}>
                   <List.Content>
